@@ -11,5 +11,5 @@ export interface PropertyInfo {
   salesDescription: string;
   mlsNumber: string;
   userNotes: string;
-  imageName: string;
+  imageName: any;
 };

@@ -1,0 +1,48 @@
+<h3>Property Info</h3>
+<form [formGroup]="propertyInfoForm" novalidate>
+  <div class="form-group required">
+    <label for="name">Report Name</label>
+    <input type="text" maxlength="255" formControlName="reportName"
+      name="name" [(ngModel)]="propertyInfo.reportName" />
+  </div>
+  <div class="form-group required">
+    <label for="street">Street</label>
+    <input type="text" formControlName="street"
+      name="street" [(ngModel)]="propertyInfo.address.street" />
+  </div>
+  <div class="form-group required">
+    <label for="city">City</label>
+    <input type="text" formControlName="city"
+      name="city" [(ngModel)]="propertyInfo.address.city" />
+  </div>
+  <div class="form-group required">
+    <label for="state">State</label>
+    <input type="text" formControlName="state"
+      name="state" [(ngModel)]="propertyInfo.address.state" />
+  </div>
+  <div class="form-group required">
+    <label for="zip">Zip</label>
+    <input type="text" formControlName="zip"
+      name="zip" [(ngModel)]="propertyInfo.address.zip" />
+  </div>
+  <div class="form-group required">
+    <label for="description">Sales Description</label>
+    <textarea formControlName="description" rows="10" cols="50"
+      name="description" [(ngModel)]="propertyInfo.salesDescription"></textarea>
+  </div>
+  <div class="form-group required">
+    <label for="mls">MLS #</label>
+    <input type="number" formControlName="mls"
+      name="mls" [(ngModel)]="propertyInfo.mlsNumber" />
+  </div>
+  <div class="form-group required">
+    <label for="notes">Notes</label>
+    <textarea formControlName="notes" rows="10" cols="50"
+      name="notes" [(ngModel)]="propertyInfo.userNotes"></textarea>
+  </div>
+  <div class="form-group required">
+    <label for="imageName">Picture</label>
+    <input type="file" formControlName="imageName" accept="image/*"
+      name="imageName" [(ngModel)]="propertyInfo.imageName" />
+  </div>
+</form>
