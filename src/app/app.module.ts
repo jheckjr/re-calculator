@@ -11,6 +11,7 @@ import { PropertyInfoReducer } from './reducers';
 import { AppComponent } from './app.component';
 import { PropertyInfoComponent } from './property-info/property-info.component';
 import { PurchaseInfoComponent } from './purchase-info/purchase-info.component';
+import { RentalInfoComponent } from './rental-info/rental-info.component';
 
 export function storeFactory() {
   return createStore<PropertyInfo>(PropertyInfoReducer);
@@ -20,7 +21,8 @@ export function storeFactory() {
   declarations: [
     AppComponent,
     PropertyInfoComponent,
-    PurchaseInfoComponent
+    PurchaseInfoComponent,
+    RentalInfoComponent
   ],
   imports: [
     BrowserModule,
