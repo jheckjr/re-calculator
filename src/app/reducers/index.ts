@@ -1,1 +1,1 @@
-export * from './prop-info.reducer';
+export * from './property-info.reducer';
