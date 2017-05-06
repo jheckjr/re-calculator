@@ -20,7 +20,7 @@ export const PropertyInfoReducer = function(state: PropertyInfo = initialState,
   action: Action): PropertyInfo {
     switch (action.type) {
       case UPDATE_PROPERTY_INFO: {
-        return (<UpdatePropertyInfoAction>action).propertyInfo; 
+        return (<UpdatePropertyInfoAction>action).propertyInfo;
       }
     }
-  }
+  };
