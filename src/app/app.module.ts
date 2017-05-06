@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { createStore } from 'redux';
 
@@ -10,6 +10,7 @@ import { PropertyInfoReducer } from './reducers';
 
 import { AppComponent } from './app.component';
 import { PropertyInfoComponent } from './property-info/property-info.component';
+import { PurchaseInfoComponent } from './purchase-info/purchase-info.component';
 
 export function storeFactory() {
   return createStore<PropertyInfo>(PropertyInfoReducer);
@@ -18,12 +19,14 @@ export function storeFactory() {
 @NgModule({
   declarations: [
     AppComponent,
-    PropertyInfoComponent
+    PropertyInfoComponent,
+    PurchaseInfoComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ReactiveFormsModule
   ],
   providers: [{ provide: AppStore, useFactory: storeFactory }],
   bootstrap: [AppComponent]
