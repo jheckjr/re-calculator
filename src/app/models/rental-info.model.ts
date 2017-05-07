@@ -1,5 +1,5 @@
 export interface RentalInfo {
-  numUnits: numbe;
+  numUnits: number;
   rents: number[];
   otherIncome: number;
   vacancyRate: number;
