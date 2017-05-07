@@ -1,1 +1,2 @@
-export * from './prop-info.reducer';
+export * from './property-info.reducer';
+export * from './rental-info.reducer';

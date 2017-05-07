@@ -19,10 +19,10 @@ export class RentalInfoComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) {
     this.rentalInfoForm = this.formBuilder.group({
       'numUnits': [undefined, Validators.required],
-      this.unitNames[0]: [undefined, Validators.required],
-      this.unitNames[1]: [undefined, Validators.required],
-      this.unitNames[2]: [undefined, Validators.required],
-      this.unitNames[3]: [undefined, Validators.required],
+      'unit1': [undefined, Validators.required],
+      'unit2': [undefined, Validators.required],
+      'unit3': [undefined, Validators.required],
+      'unit4': [undefined, Validators.required],
       'otherIncome': [undefined, Validators.required],
       'vacancyRate': [undefined, Validators.required],
       'electric': [undefined, Validators.required],

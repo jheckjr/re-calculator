@@ -1,3 +1,4 @@
+import { Action } from 'redux';
 import { RentalInfo } from '../models';
 import { UPDATE_RENTAL_INFO, UpdateRentalInfoAction } from '../actions';
 

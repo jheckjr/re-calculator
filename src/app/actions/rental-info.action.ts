@@ -1,7 +1,7 @@
 import { Action, ActionCreator } from 'redux';
 import { RentalInfo } from '../models';
 
-export const UDPATE_RENTAL_INFO = 'Update Rental Info';
+export const UPDATE_RENTAL_INFO = 'Update Rental Info';
 export interface UpdateRentalInfoAction extends Action {
   rentalInfo: RentalInfo;
 };
