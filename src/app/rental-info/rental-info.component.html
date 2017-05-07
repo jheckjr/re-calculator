@@ -1,0 +1,101 @@
+<h3>Rental Info</h3>
+<form [formGroup]="rentalInfoForm" novalidate>
+  <div class="form-group required">
+    <label for="numUnits">Number of Units</label>
+    <select name="numUnits" formControlName="numUnits"
+      [(ngModel)]="rentalInfo.numUnits">
+      <option *ngFor="let units of unitOptions" [value]="units">
+        {{units}}
+      </option>
+    </select>
+  </div>
+  <div class="form-group required">
+    <label for="unit">Monthly Unit Rents</label>
+    <input type="number" *ngFor="let name of unitNames; let idx = index"
+      [formControlName]="unitNames[idx]" [(ngModel)]="rentalInfo.rents[idx]">
+  </div>
+  <div>
+    <label for="totalRent">Total Rent</label>
+    <span name="totalRent">$0</span>
+  </div>
+
+  <div class="form-group required">
+    <label for="otherIncome">Other Income</label>
+    <input type="text" formControlName="otherIncome"
+      name="otherIncome" [(ngModel)]="rentalInfo.otherIncome" />
+  </div>
+  <div class="form-group required">
+    <label for="vacancyRate">Vacancy Rate</label>
+    <input type="text" formControlName="vacancyRate"
+      name="vacancyRate" [(ngModel)]="rentalInfo.vacancyRate" />
+  </div>
+
+  <h4>Owner Expenses</h4>
+  <div class="form-group required">
+    <label for="electric">Electric</label>
+    <input type="text" formControlName="electric"
+      name="electric" [(ngModel)]="rentalInfo.expenses.electric" />
+  </div>
+  <div class="form-group required">
+    <label for="gas">Gas</label>
+    <input type="text" formControlName="gas"
+      name="gas" [(ngModel)]="rentalInfo.expenses.gas" />
+  </div>
+  <div class="form-group required">
+    <label for="water">Water</label>
+    <input type="text" formControlName="water"
+      name="water" [(ngModel)]="rentalInfo.expenses.water" />
+  </div>
+  <div class="form-group required">
+    <label for="sewer">Sewer</label>
+    <input type="text" formControlName="sewer"
+      name="sewer" [(ngModel)]="rentalInfo.expenses.sewer" />
+  </div>
+  <div class="form-group required">
+    <label for="trash">Trash</label>
+    <input type="text" formControlName="trash"
+      name="trash" [(ngModel)]="rentalInfo.expenses.trash" />
+  </div>
+  <div class="form-group required">
+    <label for="other">Other</label>
+    <input type="text" formControlName="other"
+      name="other" [(ngModel)]="rentalInfo.expenses.other" />
+  </div>
+  <div class="form-group required">
+    <label for="repairs">Repairs / Capex (%)</label>
+    <input type="text" formControlName="repairs"
+      name="repairs" [(ngModel)]="rentalInfo.expenses.repairs" />
+  </div>
+  <div class="form-group required">
+    <label for="propMgmt">Property Management</label>
+    <input type="text" formControlName="propMgmt"
+      name="propMgmt" [(ngModel)]="rentalInfo.expenses.propMgmt" />
+  </div>
+  <div class="form-group required">
+    <label for="propTax">Property Tax</label>
+    <input type="text" formControlName="propTax"
+      name="propTax" [(ngModel)]="rentalInfo.expenses.propTax" />
+  </div>
+  <div class="form-group required">
+    <label for="insurance">Insurance</label>
+    <input type="text" formControlName="insurance"
+      name="insurance" [(ngModel)]="rentalInfo.expenses.insurance" />
+  </div>
+
+  <h4>Growth</h4>
+  <div class="form-group required">
+    <label for="revenue">Revenue (%)</label>
+    <input type="text" formControlName="revenue"
+      name="revenue" [(ngModel)]="rentalInfo.growth.revenue" />
+  </div>
+  <div class="form-group required">
+    <label for="expenses">Expenses (%)</label>
+    <input type="text" formControlName="expenses"
+      name="expenses" [(ngModel)]="rentalInfo.growth.expenses" />
+  </div>
+  <div class="form-group required">
+    <label for="appreciation">Appreciation (%)</label>
+    <input type="text" formControlName="appreciation"
+      name="appreciation" [(ngModel)]="rentalInfo.growth.appreciation" />
+  </div>
+</form>
