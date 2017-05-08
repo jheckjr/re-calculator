@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup,
-  FormBuilder,
-  FormControl,
-  Validators } from '@angular/forms';
+import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PropertyInfo } from '../models';
 
 @Component({
@@ -10,11 +7,13 @@ import { PropertyInfo } from '../models';
   templateUrl: './property-info.component.html',
   styleUrls: ['./property-info.component.css']
 })
-export class PropertyInfoComponent implements OnInit {
+export class PropertyInfoComponent implements OnChanges {
+  @Input() propertyInfo: PropertyInfo;
+  @Output() isValid = new EventEmitter();
   private propertyInfoForm: FormGroup;
-  private propertyInfo: PropertyInfo;
 
   constructor(private formBuilder: FormBuilder) {
+    // Build form with validators
     this.propertyInfoForm = this.formBuilder.group({
       'reportName': [undefined, Validators.required],
       'street': undefined,
@@ -26,24 +25,31 @@ export class PropertyInfoComponent implements OnInit {
       'notes': undefined,
       'imageName': undefined
     });
-
-    // TODO: Remove Temporary Stub
-    this.propertyInfo = {
-      reportName: '',
-      address: {
-        street: '',
-        city: '',
-        state: null,
-        zip: ''
-      },
-      salesDescription: '',
-      mlsNumber: '',
-      userNotes: '',
-      imageName: null
-    };
+    // Subscribe to form changes to determine validity
+    this.propertyInfoForm.valueChanges.subscribe(() => {
+      if (this.propertyInfoForm.valid) {
+        this.isValid.emit(true);
+      } else {
+        this.isValid.emit(false);
+      }
+    });
   }
 
-  ngOnInit() {
+  ngOnChanges() {
+    if (!this.propertyInfo) {
+      this.propertyInfo = {
+        reportName: '',
+        address: {
+          street: '',
+          city: '',
+          state: null,
+          zip: ''
+        },
+        salesDescription: '',
+        mlsNumber: '',
+        userNotes: '',
+        imageName: null
+      };
+    }
   }
-
 }

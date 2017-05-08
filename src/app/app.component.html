@@ -1,6 +1,7 @@
 <h1>
   {{title}}
 </h1>
-<app-property-info></app-property-info>
-<app-purchase-info></app-purchase-info>
-<app-rental-info></app-rental-info>
+<app-property-info [propertyInfo]="propertyInfo" (isValid)="propertyInfoValid = $event"></app-property-info>
+<app-purchase-info [purchaseInfo]="purchaseInfo" (isValid)="purchaseInfoValid = $event"></app-purchase-info>
+<app-rental-info [rentalInfo]="rentalInfo" (isValid)="rentalInfoValid = $event"></app-rental-info>
+<button [disabled]="isFormValid()" (click)="submitInfo()">Submit</button>

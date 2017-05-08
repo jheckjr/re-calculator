@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup,
-  FormBuilder,
-  FormControl,
-  Validators } from '@angular/forms';
+import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PurchaseInfo } from '../models';
 
 @Component({
@@ -10,11 +7,13 @@ import { PurchaseInfo } from '../models';
   templateUrl: './purchase-info.component.html',
   styleUrls: ['./purchase-info.component.css']
 })
-export class PurchaseInfoComponent implements OnInit {
+export class PurchaseInfoComponent implements OnChanges {
+  @Input() purchaseInfo: PurchaseInfo;
+  @Output() isValid = new EventEmitter();
   private purchaseInfoForm: FormGroup;
-  private purchaseInfo: PurchaseInfo;
 
   constructor(private formBuilder: FormBuilder) {
+    // Build form with validators
     this.purchaseInfoForm = this.formBuilder.group({
       'purchasePrice': [undefined, Validators.required],
       'closingCosts': [undefined, Validators.required],
@@ -24,22 +23,29 @@ export class PurchaseInfoComponent implements OnInit {
       'interestRate': [undefined, Validators.required],
       'loanTerm': [undefined, Validators.required]
     });
-
-    // TODO: Remove temporary stub
-    this.purchaseInfo = {
-      purchasePrice: 0,
-      closingCosts: 0,
-      repairCosts: 0,
-      arv: 0,
-      loanInfo: {
-        downPmtPct: 0,
-        interestRate: 0,
-        loanTerm: 0
+    // Subscribe to form changes to determine validity
+    this.purchaseInfoForm.valueChanges.subscribe(() => {
+      if (this.purchaseInfoForm.valid) {
+        this.isValid.emit(true);
+      } else {
+        this.isValid.emit(false);
       }
-    };
+    });
   }
 
-  ngOnInit() {
+  ngOnChanges() {
+    if (!this.purchaseInfo) {
+      this.purchaseInfo = {
+        purchasePrice: 0,
+        closingCosts: 0,
+        repairCosts: 0,
+        arv: 0,
+        loanInfo: {
+          downPmtPct: 0,
+          interestRate: 0,
+          loanTerm: 0
+        }
+      };
+    }
   }
-
 }
