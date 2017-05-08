@@ -42,7 +42,7 @@ export class RentalInfoComponent implements OnInit {
 
     // TODO: Remove temporary stub
     this.rentalInfo = {
-      numUnits: 0,
+      numUnits: 1,
       rents: [0, 0, 0, 0],
       otherIncome: 0,
       vacancyRate: 0,
