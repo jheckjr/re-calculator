@@ -2,19 +2,7 @@ import { Action } from 'redux';
 import { PropertyInfo } from '../models';
 import { UPDATE_PROPERTY_INFO, UpdatePropertyInfoAction } from '../actions';
 
-const initialState: PropertyInfo = {
-  reportName: '',
-  address: {
-    street: '',
-    city: '',
-    state: null,
-    zip: ''
-  },
-  salesDescription: '',
-  mlsNumber: '',
-  userNotes: '',
-  imageName: ''
-};
+const initialState: PropertyInfo = null;
 
 export const PropertyInfoReducer = function(state: PropertyInfo = initialState,
   action: Action): PropertyInfo {
