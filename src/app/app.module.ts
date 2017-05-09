@@ -13,6 +13,7 @@ import { PropertyInfoComponent } from './property-info/property-info.component';
 import { PurchaseInfoComponent } from './purchase-info/purchase-info.component';
 import { RentalInfoComponent } from './rental-info/rental-info.component';
 import { ResultsComponent } from './results/results.component';
+import { EnumKeysPipe } from './enum-keys.pipe';
 
 export function storeFactory() {
   return createStore<AppState>(reducer);
@@ -24,7 +25,8 @@ export function storeFactory() {
     PropertyInfoComponent,
     PurchaseInfoComponent,
     RentalInfoComponent,
-    ResultsComponent
+    ResultsComponent,
+    EnumKeysPipe
   ],
   imports: [
     BrowserModule,

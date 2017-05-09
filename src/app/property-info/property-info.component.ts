@@ -1,9 +1,11 @@
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { PropertyInfo } from '../models';
+import { PropertyInfo, State } from '../models';
+import { EnumKeysPipe } from '../pipes';
 
 @Component({
   selector: 'app-property-info',
+  pipes: [EnumKeysPipe],
   templateUrl: './property-info.component.html',
   styleUrls: ['./property-info.component.css']
 })
@@ -11,6 +13,7 @@ export class PropertyInfoComponent implements OnChanges {
   @Input() propertyInfo: PropertyInfo;
   @Output() isValid = new EventEmitter();
   private propertyInfoForm: FormGroup;
+  private states = State;
 
   constructor(private formBuilder: FormBuilder) {
     // Build form with validators

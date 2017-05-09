@@ -17,8 +17,12 @@
   </div>
   <div class="form-group required">
     <label for="state">State</label>
-    <input type="text" formControlName="state"
-      name="state" [(ngModel)]="propertyInfo.address.state" />
+    <select formControlName="state" name="state"
+      [(ngModel)]="propertyInfo.address.state" >
+      <option *ngFor="let item of states | keys" [value]="item.key">
+        {{item.value}}
+      </option>
+    </select>
   </div>
   <div class="form-group required">
     <label for="zip">Zip</label>
