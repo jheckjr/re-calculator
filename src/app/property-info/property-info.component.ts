@@ -1,11 +1,9 @@
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PropertyInfo, State } from '../models';
-import { EnumKeysPipe } from '../pipes';
 
 @Component({
   selector: 'app-property-info',
-  pipes: [EnumKeysPipe],
   templateUrl: './property-info.component.html',
   styleUrls: ['./property-info.component.css']
 })

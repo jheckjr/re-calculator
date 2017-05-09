@@ -19,7 +19,7 @@
     <label for="state">State</label>
     <select formControlName="state" name="state"
       [(ngModel)]="propertyInfo.address.state" >
-      <option *ngFor="let item of states | keys" [value]="item.key">
+      <option *ngFor="let item of states | enumKeys" [value]="item.key">
         {{item.value}}
       </option>
     </select>

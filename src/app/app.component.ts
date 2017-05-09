@@ -39,8 +39,7 @@ export class AppComponent {
     this.store.dispatch(updatePurchaseInfo(this.state.purchaseInfo));
     this.store.dispatch(updateRentalInfo(this.state.rentalInfo));
 
-    // Calculate and display results
-
+    // TODO: Calculate and display results
     event.preventDefault();
   }
 }
