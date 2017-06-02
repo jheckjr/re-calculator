@@ -35,7 +35,7 @@ export class CalculateResultsService {
     results.gross.incomeYear = grossInc * this.MONTHS_IN_YEAR;
 
     // Annual expenses
-    let expenses = this.totalExpenses(rentalInfo.expenses, grossInc);
+    let expenses = this.totalExpenses(rentalInfo.expenses, results.gross.incomeYear);
     results.expenses.year = expenses;
     results.expenses.month = expenses / this.MONTHS_IN_YEAR;
 
@@ -93,7 +93,7 @@ export class CalculateResultsService {
    * Input: loan amount
    *		  interest rate (percentage)
    *		  term in years
-   * Output: monthly mortgage payment
+   * Output: annual mortgage payment
    */
   private loanPayment(loanAmount: number, intRate: number, loanTerm: number): number {
     if (!loanAmount || !intRate || !loanTerm)
@@ -107,7 +107,7 @@ export class CalculateResultsService {
     let payment = (loanAmount * rate * Math.pow(1 + rate, term)) /
       (Math.pow(1 + rate, term) - 1);
 
-    return payment;
+    return payment * 12;
   }
 
   /*
@@ -130,7 +130,6 @@ export class CalculateResultsService {
   /*
    * Gross Revenue
    * Input: monthly rent amounts
-   * 		  other revenue sources
    * Output: monthly gross revenue
    */
   private grossRevenue(rent: number[]): number {
@@ -138,13 +137,11 @@ export class CalculateResultsService {
       return 0;
 
     if (rent.length === 0)
-    		return 0;
+    	return 0;
 
-    let rentAmount = rent.reduce(function(prev, curr) {
-    		return prev += curr;
+    return rent.reduce(function(prev, curr) {
+    	return prev += curr;
     });
-
-    return rentAmount;
   }
 
   /*
@@ -166,6 +163,7 @@ export class CalculateResultsService {
   /*
    * Total expenses
    * Input: list of annual expenses
+   *      gross annual income
    * Output: sum of expenses
    */
   private totalExpenses(expenses: any, grossInc: number): number {
@@ -285,7 +283,7 @@ export class CalculateResultsService {
     if (loanPayment === 0)
     		return 0;
 
-    return noi / (loanPayment * 12);
+    return noi / loanPayment;
   }
 
   /*
