@@ -2,20 +2,20 @@ export interface Results {
   purchasePrice: number;
   totalCost: number;
   cashOutlay: number;
-  grossIncome: {
+  gross: {
     revenueMonth: number,
-    revenueAnnual: number,
+    revenueYear: number,
     incomeMonth: number,
-    incomeAnnual: number
+    incomeYear: number
   };
   expenses: {
     month: number,
-    annual: number
+    year: number
   };
   keyFactors: {
     noi: number,
     cashFlowMonth: number,
-    cashFlowAnnual: number,
+    cashFlowYear: number,
     cashROI: number,
     totalROI: number,
     capRate: number,
