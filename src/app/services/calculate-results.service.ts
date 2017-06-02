@@ -3,47 +3,72 @@ import { PurchaseInfo, RentalInfo, Results } from '../models';
 
 @Injectable()
 export class CalculateResultsService {
+  private MONTHS_IN_YEAR = 12;
+  private INITIAL_YEAR = 1;
 
   constructor() { }
 
+  /*
+   * Make the calculations to produce the investment results from the purchase
+   * and rental information. Return the results in a Results object.
+   */
   calcResults(purchaseInfo: PurchaseInfo, rentalInfo: RentalInfo): Results {
     let results: Results;
     results.purchasePrice = purchaseInfo.purchasePrice;
     results.totalCost = purchaseInfo.purchasePrice + purchaseInfo.closingCosts +
       purchaseInfo.repairCosts;
 
-    let downPmtAmt = (purchaseInfo.purchasePrice * purchaseInfo.loanInfo.downPmtPct) / 100;
+    // Downpayment amount for use in other calculations
+    let downPmtAmt =
+      purchaseInfo.purchasePrice * (purchaseInfo.loanInfo.downPmtPct / 100);
     results.cashOutlay = this.cashOutlay(downPmtAmt, purchaseInfo.closingCosts,
       purchaseInfo.repairCosts);
 
+    // Monthly gross revenue
     let grossRev = this.grossRevenue(rentalInfo.rents);
     results.gross.revenueMonth = grossRev + rentalInfo.otherIncome;
-    results.gross.revenueYear = grossRev * 12;
+    results.gross.revenueYear = grossRev * this.MONTHS_IN_YEAR;
 
+    // Monthly gross income
     let grossInc = this.grossIncome(grossRev, rentalInfo.vacancyRate);
     results.gross.incomeMonth = grossInc + rentalInfo.otherIncome;
-    results.gross.incomeYear = grossInc * 12;
+    results.gross.incomeYear = grossInc * this.MONTHS_IN_YEAR;
 
+    // Annual expenses
     let expenses = this.totalExpenses(rentalInfo.expenses, grossInc);
     results.expenses.year = expenses;
-    results.expenses.month = expenses / 12;
+    results.expenses.month = expenses / this.MONTHS_IN_YEAR;
 
+    // Annual Net Operating Income
     results.keyFactors.noi = this.noi(results.gross.incomeYear, results.expenses.year);
 
+    // Total loan amount, monthly loan payment, and annual cash flow
     let loanAmt = this.loanAmount(purchaseInfo.purchasePrice, downPmtAmt);
     let loanPmt = this.loanPayment(loanAmt, purchaseInfo.loanInfo.interestRate,
       purchaseInfo.loanInfo.loanTerm);
     let cashFlow = this.cashFlow(results.keyFactors.noi, loanPmt);
     results.keyFactors.cashFlowYear = cashFlow;
-    results.keyFactors.cashFlowMonth = cashFlow / 12;
+    results.keyFactors.cashFlowMonth = cashFlow / this.MONTHS_IN_YEAR;
 
     results.keyFactors.cashROI = this.cashROI(cashFlow, results.cashOutlay);
-    // TODO: totalROI
+
+    // Loan amortization schedule, total equity per year, appreciation per year
+    let amortSchedule = this.makeAmortSchedule(loanAmt,
+      purchaseInfo.loanInfo.interestRate, purchaseInfo.loanInfo.loanTerm);
+    let equity = this.equity(amortSchedule, this.INITIAL_YEAR);
+    let appreciation = purchaseInfo.arv + this.appreciation(purchaseInfo.arv,
+      rentalInfo.growth.appreciation, this.INITIAL_YEAR);
+    results.keyFactors.totalROI = this.totalROI(equity, appreciation, cashFlow,
+      results.cashOutlay);
     results.keyFactors.capRate = this.capRate(purchaseInfo.purchasePrice,
       results.keyFactors.noi);
     results.keyFactors.grm = this.grossRentMult(purchaseInfo.purchasePrice,
       results.gross.revenueYear);
     results.keyFactors.dscr = this.debtSCRatio(results.keyFactors.noi, loanPmt)
+
+    results.propertyValue = purchaseInfo.arv + this.appreciation(purchaseInfo.arv,
+      rentalInfo.growth.appreciation, this.INITIAL_YEAR, true);
+    results.totalEquity = results.propertyValue - amortSchedule[1];
     return null;
   }
 
@@ -87,19 +112,19 @@ export class CalculateResultsService {
 
   /*
    * Cash outlay
-   * Input: improvement cost
+   * Input: downpayment
    * 		  closing costs
-   *		  downpayment
+   *      repair cost
    * Output: cash outlay amount
    */
-  private cashOutlay(downpayment: number, closingCost: number, improvCost: number): number {
-    if (!downpayment || !closingCost || !improvCost)
+  private cashOutlay(downpayment: number, closingCost: number, repairCost: number): number {
+    if (!downpayment || !closingCost || !repairCost)
       return 0;
 
-    if (downpayment < 0 || closingCost < 0 || improvCost < 0)
+    if (downpayment < 0 || closingCost < 0 || repairCost < 0)
       return 0;
 
-    return downpayment + closingCost + improvCost;
+    return downpayment + closingCost + repairCost;
   }
 
   /*
@@ -150,7 +175,7 @@ export class CalculateResultsService {
     let totalExp = expenses.electric + expenses.gas + expenses.water +
       expenses.sewer + expenses.trash + expenses.other + expenses.propTax +
       expenses.insurance;
-    totalExp += (repairs + propMgmt) * grossInc;
+    totalExp += (expenses.repairs + expenses.propMgmt) * grossInc;
 
     return totalExp;
   }
