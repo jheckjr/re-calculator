@@ -69,7 +69,7 @@ export class CalculateResultsService {
     results.propertyValue = purchaseInfo.arv + this.appreciation(purchaseInfo.arv,
       rentalInfo.growth.appreciation, this.INITIAL_YEAR, true);
     results.totalEquity = results.propertyValue - amortSchedule[1];
-    return null;
+    return results;
   }
 
   /*
