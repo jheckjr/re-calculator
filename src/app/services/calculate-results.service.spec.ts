@@ -56,6 +56,29 @@ describe('CalculateResultsService', () => {
     let results = service.calcResults(purchaseInfoMock, rentalInfoMock);
 
     // verify
+    // Hard-coded expected values come from spreadsheet calculations in Google Drive
+    // (https://docs.google.com/spreadsheets/d/10Lo4wimc7OpqE6idMAVhkbXMv9NXJm4qZk_Hsw-_WKg/edit#gid=1818283363)
     // TODO: check every item in the results object - need to compare to spreadsheet
+    expect(results.purchasePrice).toEqual(purchaseInfoMock.purchasePrice);
+    expect(results.totalCost).toEqual(purchaseInfoMock.purchasePrice +
+      purchaseInfoMock.closingCosts + purchaseInfoMock.repairCosts);
+    expect(results.cashOutlay).toEqual(42500);
+    expect(results.gross.revenueMonth).toEqual(1400);
+    expect(results.gross.revenueYear).toEqual(16800);
+    expect(results.gross.incomeMonth).toEqual(1296);
+    expect(results.gross.incomeYear).toEqual(15552);
+    expect(results.expenses.month).toEqual(504);
+    expect(results.expenses.year).toEqual(6050);
+    expect(results.keyFactors.noi).toEqual(9502);
+    expect(results.keyFactors.cashFlowMonth).toEqual(333);
+    expect(results.keyFactors.cashFlowYear).toEqual(4002);
+    // TODO: Will likely need to make these ranges
+    expect(results.keyFactors.cashROI).toEqual(9.42);
+    expect(results.keyFactors.totalROI).toEqual(16.65);
+    expect(results.keyFactors.capRate).toEqual(7.92);
+    expect(results.keyFactors.grm).toEqual(8.24);
+    expect(results.keyFactors.dscr).toEqual(1.73);
+    expect(results.propertyValue).toEqual(150000);
+    expect(results.totalEquity).toEqual(55691);
   }));
 });

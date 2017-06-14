@@ -27,12 +27,12 @@ export class CalculateResultsService {
     // Monthly gross revenue
     let grossRev = this.grossRevenue(rentalInfo.rents);
     results.gross.revenueMonth = grossRev + rentalInfo.otherIncome;
-    results.gross.revenueYear = grossRev * this.MONTHS_IN_YEAR;
+    results.gross.revenueYear = results.gross.revenueMonth * this.MONTHS_IN_YEAR;
 
     // Monthly gross income
     let grossInc = this.grossIncome(grossRev, rentalInfo.vacancyRate);
     results.gross.incomeMonth = grossInc + rentalInfo.otherIncome;
-    results.gross.incomeYear = grossInc * this.MONTHS_IN_YEAR;
+    results.gross.incomeYear = results.gross.incomeMonth * this.MONTHS_IN_YEAR;
 
     // Annual expenses
     let expenses = this.totalExpenses(rentalInfo.expenses, results.gross.incomeYear);
