@@ -14,6 +14,7 @@ import { PurchaseInfoComponent } from './purchase-info/purchase-info.component';
 import { RentalInfoComponent } from './rental-info/rental-info.component';
 import { ResultsComponent } from './results/results.component';
 import { EnumKeysPipe } from './pipes';
+import { CalculateResultsService } from './services/calculate-results.service';
 
 export function storeFactory() {
   return createStore<AppState>(reducer);
@@ -34,7 +35,8 @@ export function storeFactory() {
     HttpModule,
     ReactiveFormsModule
   ],
-  providers: [{ provide: AppStore, useFactory: storeFactory }],
+  providers: [{ provide: AppStore, useFactory: storeFactory },
+    CalculateResultsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

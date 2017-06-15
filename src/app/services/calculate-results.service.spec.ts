@@ -3,9 +3,10 @@ import { TestBed, inject } from '@angular/core/testing';
 import { CalculateResultsService } from './calculate-results.service';
 import { PurchaseInfo, RentalInfo, Results } from '../models';
 
-describe('CalculateResultsService', () => {
+fdescribe('CalculateResultsService', () => {
   let purchaseInfoMock: PurchaseInfo;
   let rentalInfoMock: RentalInfo;
+  let results: Results;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -49,11 +50,11 @@ describe('CalculateResultsService', () => {
     };
   });
 
-  it('should calculate a Results object', inject([CalculateResultsService], (service: CalculateResultsService) => {
+  it('should calculate the purchase costs', inject([CalculateResultsService], (service: CalculateResultsService) => {
     expect(service).toBeTruthy();
 
     // method under test
-    let results = service.calcResults(purchaseInfoMock, rentalInfoMock);
+    results = service.calcResults(purchaseInfoMock, rentalInfoMock);
 
     // verify
     // Hard-coded expected values come from spreadsheet calculations in Google Drive
@@ -63,21 +64,68 @@ describe('CalculateResultsService', () => {
     expect(results.totalCost).toEqual(purchaseInfoMock.purchasePrice +
       purchaseInfoMock.closingCosts + purchaseInfoMock.repairCosts);
     expect(results.cashOutlay).toEqual(42500);
+  }));
+
+  it('should calculate the gross revenue/income', inject([CalculateResultsService], (service: CalculateResultsService) => {
+    expect(service).toBeTruthy();
+
+    // method under test
+    results = service.calcResults(purchaseInfoMock, rentalInfoMock);
+
+    // verify
+    // Hard-coded expected values come from spreadsheet calculations in Google Drive
+    // (https://docs.google.com/spreadsheets/d/10Lo4wimc7OpqE6idMAVhkbXMv9NXJm4qZk_Hsw-_WKg/edit#gid=1818283363)
+    // TODO: check every item in the results object - need to compare to spreadsheet
     expect(results.gross.revenueMonth).toEqual(1400);
     expect(results.gross.revenueYear).toEqual(16800);
     expect(results.gross.incomeMonth).toEqual(1296);
     expect(results.gross.incomeYear).toEqual(15552);
-    expect(results.expenses.month).toEqual(504);
-    expect(results.expenses.year).toEqual(6050);
-    expect(results.keyFactors.noi).toEqual(9502);
-    expect(results.keyFactors.cashFlowMonth).toEqual(333);
-    expect(results.keyFactors.cashFlowYear).toEqual(4002);
+  }));
+
+  it('should calculate the expenses', inject([CalculateResultsService], (service: CalculateResultsService) => {
+    expect(service).toBeTruthy();
+
+    // method under test
+    results = service.calcResults(purchaseInfoMock, rentalInfoMock);
+
+    // verify
+    // Hard-coded expected values come from spreadsheet calculations in Google Drive
+    // (https://docs.google.com/spreadsheets/d/10Lo4wimc7OpqE6idMAVhkbXMv9NXJm4qZk_Hsw-_WKg/edit#gid=1818283363)
+    // TODO: check every item in the results object - need to compare to spreadsheet
+    expect(results.expenses.month).toBeCloseTo(524, 0);
+    expect(results.expenses.year).toBeCloseTo(6290, 0);
+  }));
+
+  it('should calculate the key factors', inject([CalculateResultsService], (service: CalculateResultsService) => {
+    expect(service).toBeTruthy();
+
+    // method under test
+    results = service.calcResults(purchaseInfoMock, rentalInfoMock);
+
+    // verify
+    // Hard-coded expected values come from spreadsheet calculations in Google Drive
+    // (https://docs.google.com/spreadsheets/d/10Lo4wimc7OpqE6idMAVhkbXMv9NXJm4qZk_Hsw-_WKg/edit#gid=1818283363)
+    // TODO: check every item in the results object - need to compare to spreadsheet
+    expect(results.keyFactors.noi).toBeCloseTo(9262, 0);
+    expect(results.keyFactors.cashFlowMonth).toBeCloseTo(313, 0);
+    expect(results.keyFactors.cashFlowYear).toBeCloseTo(3762, 0);
     // TODO: Will likely need to make these ranges
-    expect(results.keyFactors.cashROI).toEqual(9.42);
-    expect(results.keyFactors.totalROI).toEqual(16.65);
-    expect(results.keyFactors.capRate).toEqual(7.92);
-    expect(results.keyFactors.grm).toEqual(8.24);
-    expect(results.keyFactors.dscr).toEqual(1.73);
+    expect(results.keyFactors.cashROI).toBeCloseTo(8.85, 1);
+    expect(results.keyFactors.totalROI).toBeCloseTo(16.09, 1);
+    expect(results.keyFactors.capRate).toBeCloseTo(7.72, 1);
+    expect(results.keyFactors.grm).toBeCloseTo(8.24, 1);
+    expect(results.keyFactors.dscr).toBeCloseTo(1.68, 1);
+  }));
+
+  it('should calculate the value and equity', inject([CalculateResultsService], (service: CalculateResultsService) => {
+    expect(service).toBeTruthy();
+
+    // method under test
+    results = service.calcResults(purchaseInfoMock, rentalInfoMock);
+
+    // verify
+    // Hard-coded expected values come from spreadsheet calculations in Google Drive
+    // (https://docs.google.com/spreadsheets/d/10Lo4wimc7OpqE6idMAVhkbXMv9NXJm4qZk_Hsw-_WKg/edit#gid=1818283363)
     expect(results.propertyValue).toEqual(150000);
     expect(results.totalEquity).toEqual(55691);
   }));
