@@ -59,7 +59,6 @@ fdescribe('CalculateResultsService', () => {
     // verify
     // Hard-coded expected values come from spreadsheet calculations in Google Drive
     // (https://docs.google.com/spreadsheets/d/10Lo4wimc7OpqE6idMAVhkbXMv9NXJm4qZk_Hsw-_WKg/edit#gid=1818283363)
-    // TODO: check every item in the results object - need to compare to spreadsheet
     expect(results.purchasePrice).toEqual(purchaseInfoMock.purchasePrice);
     expect(results.totalCost).toEqual(purchaseInfoMock.purchasePrice +
       purchaseInfoMock.closingCosts + purchaseInfoMock.repairCosts);
@@ -75,7 +74,6 @@ fdescribe('CalculateResultsService', () => {
     // verify
     // Hard-coded expected values come from spreadsheet calculations in Google Drive
     // (https://docs.google.com/spreadsheets/d/10Lo4wimc7OpqE6idMAVhkbXMv9NXJm4qZk_Hsw-_WKg/edit#gid=1818283363)
-    // TODO: check every item in the results object - need to compare to spreadsheet
     expect(results.gross.revenueMonth).toEqual(1400);
     expect(results.gross.revenueYear).toEqual(16800);
     expect(results.gross.incomeMonth).toEqual(1296);
@@ -91,7 +89,6 @@ fdescribe('CalculateResultsService', () => {
     // verify
     // Hard-coded expected values come from spreadsheet calculations in Google Drive
     // (https://docs.google.com/spreadsheets/d/10Lo4wimc7OpqE6idMAVhkbXMv9NXJm4qZk_Hsw-_WKg/edit#gid=1818283363)
-    // TODO: check every item in the results object - need to compare to spreadsheet
     expect(results.expenses.month).toBeCloseTo(524, 0);
     expect(results.expenses.year).toBeCloseTo(6290, 0);
   }));
@@ -105,11 +102,9 @@ fdescribe('CalculateResultsService', () => {
     // verify
     // Hard-coded expected values come from spreadsheet calculations in Google Drive
     // (https://docs.google.com/spreadsheets/d/10Lo4wimc7OpqE6idMAVhkbXMv9NXJm4qZk_Hsw-_WKg/edit#gid=1818283363)
-    // TODO: check every item in the results object - need to compare to spreadsheet
     expect(results.keyFactors.noi).toBeCloseTo(9262, 0);
     expect(results.keyFactors.cashFlowMonth).toBeCloseTo(313, 0);
     expect(results.keyFactors.cashFlowYear).toBeCloseTo(3762, 0);
-    // TODO: Will likely need to make these ranges
     expect(results.keyFactors.cashROI).toBeCloseTo(8.85, 1);
     expect(results.keyFactors.totalROI).toBeCloseTo(16.09, 1);
     expect(results.keyFactors.capRate).toBeCloseTo(7.72, 1);
@@ -127,6 +122,6 @@ fdescribe('CalculateResultsService', () => {
     // Hard-coded expected values come from spreadsheet calculations in Google Drive
     // (https://docs.google.com/spreadsheets/d/10Lo4wimc7OpqE6idMAVhkbXMv9NXJm4qZk_Hsw-_WKg/edit#gid=1818283363)
     expect(results.propertyValue).toEqual(150000);
-    expect(results.totalEquity).toEqual(55691);
+    expect(results.totalEquity).toBeCloseTo(55691, 0);
   }));
 });

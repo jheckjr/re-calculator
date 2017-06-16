@@ -85,9 +85,8 @@ export class CalculateResultsService {
     let amortSchedule = this.makeAmortSchedule(loanAmt,
       purchaseInfo.loanInfo.interestRate, purchaseInfo.loanInfo.loanTerm);
     let equity = this.equity(amortSchedule, this.INITIAL_YEAR);
-    let appreciation = purchaseInfo.arv + this.appreciation(purchaseInfo.arv,
+    let appreciation = this.appreciation(this.results.totalCost,
       rentalInfo.growth.appreciation, this.INITIAL_YEAR);
-    console.log('*****\n' + equity + '\n' + appreciation);
     this.results.keyFactors.totalROI = this.totalROI(equity, appreciation, cashFlow,
       this.results.cashOutlay);
     this.results.keyFactors.capRate = this.capRate(purchaseInfo.purchasePrice,
@@ -96,8 +95,8 @@ export class CalculateResultsService {
       this.results.gross.revenueYear);
     this.results.keyFactors.dscr = this.debtSCRatio(this.results.keyFactors.noi, loanPmt)
 
-    this.results.propertyValue = purchaseInfo.arv + this.appreciation(purchaseInfo.arv,
-      rentalInfo.growth.appreciation, 0, true);
+    this.results.propertyValue = purchaseInfo.arv + this.appreciation(this.results.totalCost,
+      rentalInfo.growth.appreciation, 0);
     this.results.totalEquity = this.results.propertyValue - amortSchedule[1];
     return this.results;
   }
@@ -259,11 +258,13 @@ export class CalculateResultsService {
    * Output: total ROI percentage
    */
   private totalROI(equity: number, appreciation: number, cashFlow: number, cashOutlay: number): number {
-    if (!equity || !appreciation || !cashFlow || !cashOutlay)
+    if (!equity || !appreciation || !cashFlow || !cashOutlay) {
       return 0;
+    }
 
-    if (cashOutlay === 0)
-    		return 0;
+    if (cashOutlay === 0) {
+    	return 0;
+    }
 
     return ((equity + appreciation + cashFlow) / cashOutlay) * 100;
   }
@@ -344,31 +345,23 @@ export class CalculateResultsService {
 
   /*
    * Appreciation
-   * Input: after repair value
+   * Input: total purchase cost
    *		  appreciation rate
-          year
+   *      year
    * Output: appreciation amount
    */
-  private appreciation(arv: number, appRate: number, year: number, total: boolean = false): number {
-    if (!arv || !appRate || !year)
+  private appreciation(totalCost: number, appRate: number, year: number): number {
+    if (!totalCost || !appRate || !year)
       return 0;
 
-    if (year === 0)
-    		return arv;
-
-    let totalApp = 0;
     let annualApp = 0;
     let rate = appRate / 100;
 
     for (let i = 1; i <= year; i++) {
-    		annualApp = rate * (arv + totalApp);
-    		totalApp += annualApp;
+    		annualApp = rate * (totalCost + annualApp);
     }
 
-    if (!total)
-    		return annualApp;
-    else
-    		return totalApp;
+  	return annualApp;
   }
 
   /*
@@ -379,23 +372,26 @@ export class CalculateResultsService {
    * Output: array of yearly remaining loan amounts
    */
   private makeAmortSchedule(loanAmount: number, intRate: number, loanTerm: number): number[] {
-    if (!loanAmount || !intRate || !loanTerm)
+    if (!loanAmount || !intRate || !loanTerm) {
       return [0];
+    }
 
-    if (loanAmount <= 0 || intRate <= 0 || loanTerm <= 0)
-    		return [0];
+    if (loanAmount <= 0 || intRate <= 0 || loanTerm <= 0) {
+    	return [0];
+    }
 
     let schedule = [loanAmount];
     let monthlyRate = (intRate / 100) / 12;
     let monthlyRem = loanAmount;
-    let payment = this.loanPayment(loanAmount, intRate, loanTerm);
+    let monthlyPayment = this.loanPayment(loanAmount, intRate, loanTerm) / this.MONTHS_IN_YEAR;
 
     for (let i = 1; i <= loanTerm * 12; i++) {
-    		let principal = payment - (monthlyRem * monthlyRate);
+    		let principal = monthlyPayment - (monthlyRem * monthlyRate);
     		monthlyRem -= principal;
 
-    		if (i % 12 === 0)
-        schedule.push(monthlyRem);
+    		if (i % 12 === 0) {
+          schedule.push(monthlyRem);
+        }
     }
 
     // Remove rounding error
