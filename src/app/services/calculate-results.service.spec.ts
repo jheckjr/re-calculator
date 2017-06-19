@@ -3,7 +3,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { CalculateResultsService } from './calculate-results.service';
 import { PurchaseInfo, RentalInfo, Results } from '../models';
 
-fdescribe('CalculateResultsService', () => {
+describe('CalculateResultsService', () => {
   let purchaseInfoMock: PurchaseInfo;
   let rentalInfoMock: RentalInfo;
   let results: Results;
