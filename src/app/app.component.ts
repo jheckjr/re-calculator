@@ -4,11 +4,11 @@ import { AppStore } from './app-store';
 import { updatePropertyInfo,
   updatePurchaseInfo,
   updateRentalInfo } from './actions';
-import { CalculateResultsService } from './services';
+import { CalculateResultsService, InitDataService } from './services';
 
 @Component({
   selector: 'app-root',
-  providers: [CalculateResultsService],
+  providers: [CalculateResultsService, InitDataService],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -24,10 +24,20 @@ export class AppComponent {
   private title = 'Rental Investment Calculator';
 
   constructor(@Inject(AppStore) private store,
-    private resultsService: CalculateResultsService) {
-    // TODO: initialize data
+    private resultsService: CalculateResultsService,
+    private initDataService: InitDataService) {
+    // Initialize data. Service provides empty/zeroed initial values
+    let initialState = this.initDataService.initData();
+    this.storeDispatch(initialState);
+
     store.subscribe(() => this.updateState());
     this.updateState();
+  }
+
+  private storeDispatch(newState: any) {
+    this.store.dispatch(updatePropertyInfo(newState.propertyInfo));
+    this.store.dispatch(updatePurchaseInfo(newState.purchaseInfo));
+    this.store.dispatch(updateRentalInfo(newState.rentalInfo));
   }
 
   private updateState() {
@@ -42,11 +52,9 @@ export class AppComponent {
 
   private submitInfo(event: any) {
     // Save state
-    this.store.dispatch(updatePropertyInfo(this.state.propertyInfo));
-    this.store.dispatch(updatePurchaseInfo(this.state.purchaseInfo));
-    this.store.dispatch(updateRentalInfo(this.state.rentalInfo));
+    this.storeDispatch(this.state);
 
-    // TODO: Calculate and display results
+    // Calculate and display results
     this.results = this.resultsService.calcResults(this.state.purchaseInfo,
       this.state.rentalInfo);
     this.resultsAreVisible = true;
