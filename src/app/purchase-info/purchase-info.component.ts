@@ -48,4 +48,33 @@ export class PurchaseInfoComponent implements OnChanges {
       };
     }
   }
+  
+  // TODO: make these functions populate component variables
+  // Total cost of cash purchase
+  private totalCost() {
+  	return (this.purchaseInfo.purchasePrice + this.purchaseInfo.closingCosts + 
+  	  this.purchaseInfo.repairCosts);
+  }
+  
+  // Downpayment amount
+  private downPmtAmt() {
+  	return (this.purchaseInfo.purchasePrice * this.purchaseInfo.loanInfo.downPmtPct / 100);
+  }
+  
+  // Total loan amount
+  private loanAmt() {
+  	return (this.purchaseInfo.purchasePrice * 
+  	  (100 - this.purchaseInfo.loanInfo.downPmtPct) / 100);
+  }
+  
+  // Monthly loan payment
+  private loanPmtAmt() {
+    let rate = (this.purchaseInfo.loanInfo.interestRate / 100) / 12;	// monthly rate
+    let term = this.purchaseInfo.loanInfo.loanTerm * 12;	// term in months
+    let loanAmt = loanAmt();
+    let payment = (loanAmt * rate * Math.pow(1 + rate, term)) /
+      (Math.pow(1 + rate, term) - 1);
+
+    return payment;
+  }
 }
