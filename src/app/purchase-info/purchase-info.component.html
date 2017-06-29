@@ -18,7 +18,7 @@
 
   <div>
     <span>Total Cost</span>
-    <span>${{totalCost().toFixed(0)}}</span>
+    <span>{{totalCost()}}</span>
   </div>
 
   <div class="form-group required">
@@ -31,29 +31,29 @@
 
   <div class="form-group required">
     <label for="downPmtPct">Downpayment (%)</label>
-    <input type="number" min="0" formControlName="downPmtPct"
+    <input type="number" min="0" max="100" formControlName="downPmtPct"
       name="downPmtPct" [(ngModel)]="purchaseInfo.loanInfo.downPmtPct" />
   </div>
   <div>
     <span>Downpayment Amount</span>
-    <span>${{downPmtAmt().toFixed(0)}}</span>
+    <span>{{downPmtAmt()}}</span>
   </div>
   <div class="form-group required">
-    <label for="interestRate">Interest Rate</label>
-    <input type="number" min="0" formControlName="interestRate"
+    <label for="interestRate">Interest Rate (%)</label>
+    <input type="number" min="0" max="100" formControlName="interestRate"
       name="interestRate" [(ngModel)]="purchaseInfo.loanInfo.interestRate" />
   </div>
   <div>
     <span>Loan Amount</span>
-    <span>${{loanAmt().toFixed(0)}}</span>
+    <span>{{loanAmt()}}</span>
   </div>
   <div class="form-group required">
-    <label for="loanTerm">Loan Term</label>
-    <input type="number" min="0" formControlName="loanTerm"
+    <label for="loanTerm">Loan Term (yrs)</label>
+    <input type="number" min="0" max="100" formControlName="loanTerm"
       name="loanTerm" [(ngModel)]="purchaseInfo.loanInfo.loanTerm" />
   </div>
   <div>
     <span>Loan Payment</span>
-    <span>${{loanPmt().toFixed(0)}}</span>
+    <span>{{loanPmt()}}</span>
   </div>
 </form>
