@@ -40,6 +40,11 @@ export class RentalInfoComponent implements OnChanges {
     });
     // Subscribe to form changes to determine validity
     this.rentalInfoForm.valueChanges.subscribe(() => {
+      for (let idx = this.rentalInfo.numUnits; 
+        idx < this.rentalInfo.rents.length; idx++) {
+      	this.rentalInfo.rents[idx] = 0;
+      }
+      
       if (this.rentalInfoForm.valid) {
         this.isValid.emit(true);
       } else {
@@ -74,5 +79,13 @@ export class RentalInfoComponent implements OnChanges {
         }
       };
     }
+  }
+  
+  private totalRent() {
+  	const unitRents = this.rentalInfo.rents.slice(0, this.rentalInfo.numUnits);
+  	const rent = unitRents.reduce((total, unitRent) => 
+  	  total + (unitRent || 0), 0);
+  	const strRent = rent.toFixed(0);
+  	return '$' + Number(strRent).toLocaleString();
   }
 }

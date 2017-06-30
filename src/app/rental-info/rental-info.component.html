@@ -12,92 +12,92 @@
   <div class="form-group required">
     <label for="unit">Monthly Unit Rents</label>
     <div *ngFor="let unit of unitNames; index as idx">
-      <input type="number" *ngIf="idx < rentalInfo.numUnits"
+      <input type="number" min="0" *ngIf="idx < rentalInfo.numUnits"
         [formControlName]="unitNames[idx]" [(ngModel)]="rentalInfo.rents[idx]">
     </div>
   </div>
   <div>
     <label for="totalRent">Total Rent</label>
-    <span name="totalRent">$0</span>
+    <span name="totalRent">{{totalRent()}}</span>
   </div>
 
   <div class="form-group required">
     <label for="otherIncome">Other Income</label>
-    <input type="number" formControlName="otherIncome"
+    <input type="number" min="0" formControlName="otherIncome"
       name="otherIncome" [(ngModel)]="rentalInfo.otherIncome" />
   </div>
   <div class="form-group required">
-    <label for="vacancyRate">Vacancy Rate</label>
-    <input type="number" formControlName="vacancyRate"
+    <label for="vacancyRate">Vacancy Rate (%)</label>
+    <input type="number" min="0" max="100" formControlName="vacancyRate"
       name="vacancyRate" [(ngModel)]="rentalInfo.vacancyRate" />
   </div>
 
   <h4>Owner Expenses</h4>
   <div class="form-group required">
     <label for="electric">Electric</label>
-    <input type="number" formControlName="electric"
+    <input type="number" min="0" formControlName="electric"
       name="electric" [(ngModel)]="rentalInfo.expenses.electric" />
   </div>
   <div class="form-group required">
     <label for="gas">Gas</label>
-    <input type="number" formControlName="gas"
+    <input type="number" min="0" formControlName="gas"
       name="gas" [(ngModel)]="rentalInfo.expenses.gas" />
   </div>
   <div class="form-group required">
     <label for="water">Water</label>
-    <input type="number" formControlName="water"
+    <input type="number" min="0" formControlName="water"
       name="water" [(ngModel)]="rentalInfo.expenses.water" />
   </div>
   <div class="form-group required">
     <label for="sewer">Sewer</label>
-    <input type="number" formControlName="sewer"
+    <input type="number" min="0" formControlName="sewer"
       name="sewer" [(ngModel)]="rentalInfo.expenses.sewer" />
   </div>
   <div class="form-group required">
     <label for="trash">Trash</label>
-    <input type="number" formControlName="trash"
+    <input type="number" min="0" formControlName="trash"
       name="trash" [(ngModel)]="rentalInfo.expenses.trash" />
   </div>
   <div class="form-group required">
     <label for="other">Other</label>
-    <input type="number" formControlName="other"
+    <input type="number" min="0" formControlName="other"
       name="other" [(ngModel)]="rentalInfo.expenses.other" />
   </div>
   <div class="form-group required">
     <label for="repairs">Repairs / Capex (%)</label>
-    <input type="number" formControlName="repairs"
+    <input type="number" min="0" max="100" formControlName="repairs"
       name="repairs" [(ngModel)]="rentalInfo.expenses.repairs" />
   </div>
   <div class="form-group required">
-    <label for="propMgmt">Property Management</label>
-    <input type="number" formControlName="propMgmt"
+    <label for="propMgmt">Property Management (%)</label>
+    <input type="number" min="0" max="100" formControlName="propMgmt"
       name="propMgmt" [(ngModel)]="rentalInfo.expenses.propMgmt" />
   </div>
   <div class="form-group required">
     <label for="propTax">Property Tax</label>
-    <input type="number" formControlName="propTax"
+    <input type="number" min="0" formControlName="propTax"
       name="propTax" [(ngModel)]="rentalInfo.expenses.propTax" />
   </div>
   <div class="form-group required">
     <label for="insurance">Insurance</label>
-    <input type="number" formControlName="insurance"
+    <input type="number" min="0" formControlName="insurance"
       name="insurance" [(ngModel)]="rentalInfo.expenses.insurance" />
   </div>
 
   <h4>Growth</h4>
   <div class="form-group required">
     <label for="revenue">Revenue (%)</label>
-    <input type="number" formControlName="revenue"
+    <input type="number" min="0" formControlName="revenue"
       name="revenue" [(ngModel)]="rentalInfo.growth.revenue" />
   </div>
   <div class="form-group required">
     <label for="expenses">Expenses (%)</label>
-    <input type="number" formControlName="expenses"
+    <input type="number" min="0" formControlName="expenses"
       name="expenses" [(ngModel)]="rentalInfo.growth.expenses" />
   </div>
   <div class="form-group required">
     <label for="appreciation">Appreciation (%)</label>
-    <input type="number" formControlName="appreciation"
+    <input type="number" min="0" formControlName="appreciation"
       name="appreciation" [(ngModel)]="rentalInfo.growth.appreciation" />
   </div>
 </form>
