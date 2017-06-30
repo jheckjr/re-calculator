@@ -13,7 +13,8 @@
     <label for="unit">Monthly Unit Rents</label>
     <div *ngFor="let unit of unitNames; index as idx">
       <input type="number" min="0" *ngIf="idx < rentalInfo.numUnits"
-        [formControlName]="unitNames[idx]" [(ngModel)]="rentalInfo.rents[idx]">
+        [formControlName]="unitNames[idx]" [(ngModel)]="rentalInfo.rents[idx]"
+        onfocus="if(this.value == 0){ this.value=''; }">
     </div>
   </div>
   <div>
@@ -24,80 +25,95 @@
   <div class="form-group required">
     <label for="otherIncome">Other Income</label>
     <input type="number" min="0" formControlName="otherIncome"
-      name="otherIncome" [(ngModel)]="rentalInfo.otherIncome" />
+      name="otherIncome" [(ngModel)]="rentalInfo.otherIncome" 
+      onfocus="if(this.value == 0){ this.value=''; }"/>
   </div>
   <div class="form-group required">
     <label for="vacancyRate">Vacancy Rate (%)</label>
     <input type="number" min="0" max="100" formControlName="vacancyRate"
-      name="vacancyRate" [(ngModel)]="rentalInfo.vacancyRate" />
+      name="vacancyRate" [(ngModel)]="rentalInfo.vacancyRate"
+      onfocus="if(this.value == 0){ this.value=''; }" />
   </div>
 
   <h4>Owner Expenses</h4>
   <div class="form-group required">
     <label for="electric">Electric</label>
     <input type="number" min="0" formControlName="electric"
-      name="electric" [(ngModel)]="rentalInfo.expenses.electric" />
+      name="electric" [(ngModel)]="rentalInfo.expenses.electric"
+      onfocus="if(this.value == 0){ this.value=''; }" />
   </div>
   <div class="form-group required">
     <label for="gas">Gas</label>
     <input type="number" min="0" formControlName="gas"
-      name="gas" [(ngModel)]="rentalInfo.expenses.gas" />
+      name="gas" [(ngModel)]="rentalInfo.expenses.gas"
+      onfocus="if(this.value == 0){ this.value=''; }" />
   </div>
   <div class="form-group required">
     <label for="water">Water</label>
     <input type="number" min="0" formControlName="water"
-      name="water" [(ngModel)]="rentalInfo.expenses.water" />
+      name="water" [(ngModel)]="rentalInfo.expenses.water"
+      onfocus="if(this.value == 0){ this.value=''; }" />
   </div>
   <div class="form-group required">
     <label for="sewer">Sewer</label>
     <input type="number" min="0" formControlName="sewer"
-      name="sewer" [(ngModel)]="rentalInfo.expenses.sewer" />
+      name="sewer" [(ngModel)]="rentalInfo.expenses.sewer"
+      onfocus="if(this.value == 0){ this.value=''; }" />
   </div>
   <div class="form-group required">
     <label for="trash">Trash</label>
     <input type="number" min="0" formControlName="trash"
-      name="trash" [(ngModel)]="rentalInfo.expenses.trash" />
+      name="trash" [(ngModel)]="rentalInfo.expenses.trash"
+      onfocus="if(this.value == 0){ this.value=''; }" />
   </div>
   <div class="form-group required">
     <label for="other">Other</label>
     <input type="number" min="0" formControlName="other"
-      name="other" [(ngModel)]="rentalInfo.expenses.other" />
+      name="other" [(ngModel)]="rentalInfo.expenses.other"
+      onfocus="if(this.value == 0){ this.value=''; }" />
   </div>
   <div class="form-group required">
     <label for="repairs">Repairs / Capex (%)</label>
     <input type="number" min="0" max="100" formControlName="repairs"
-      name="repairs" [(ngModel)]="rentalInfo.expenses.repairs" />
+      name="repairs" [(ngModel)]="rentalInfo.expenses.repairs"
+      onfocus="if(this.value == 0){ this.value=''; }" />
   </div>
   <div class="form-group required">
     <label for="propMgmt">Property Management (%)</label>
     <input type="number" min="0" max="100" formControlName="propMgmt"
-      name="propMgmt" [(ngModel)]="rentalInfo.expenses.propMgmt" />
+      name="propMgmt" [(ngModel)]="rentalInfo.expenses.propMgmt"
+      onfocus="if(this.value == 0){ this.value=''; }" />
   </div>
   <div class="form-group required">
     <label for="propTax">Property Tax</label>
     <input type="number" min="0" formControlName="propTax"
-      name="propTax" [(ngModel)]="rentalInfo.expenses.propTax" />
+      name="propTax" [(ngModel)]="rentalInfo.expenses.propTax"
+      onfocus="if(this.value == 0){ this.value=''; }" />
   </div>
   <div class="form-group required">
     <label for="insurance">Insurance</label>
     <input type="number" min="0" formControlName="insurance"
-      name="insurance" [(ngModel)]="rentalInfo.expenses.insurance" />
+      name="insurance" [(ngModel)]="rentalInfo.expenses.insurance"
+      onfocus="if(this.value == 0){ this.value=''; }" />
   </div>
 
   <h4>Growth</h4>
   <div class="form-group required">
     <label for="revenue">Revenue (%)</label>
     <input type="number" min="0" formControlName="revenue"
-      name="revenue" [(ngModel)]="rentalInfo.growth.revenue" />
+      name="revenue" [(ngModel)]="rentalInfo.growth.revenue"
+      onfocus="if(this.value == 0){ this.value=''; }" />
   </div>
   <div class="form-group required">
     <label for="expenses">Expenses (%)</label>
     <input type="number" min="0" formControlName="expenses"
-      name="expenses" [(ngModel)]="rentalInfo.growth.expenses" />
+      name="expenses" [(ngModel)]="rentalInfo.growth.expenses"
+      onfocus="if(this.value == 0){ this.value=''; }" />
   </div>
   <div class="form-group required">
     <label for="appreciation">Appreciation (%)</label>
     <input type="number" min="0" formControlName="appreciation"
-      name="appreciation" [(ngModel)]="rentalInfo.growth.appreciation" />
+      name="appreciation" [(ngModel)]="rentalInfo.growth.appreciation"
+      onfocus="if(this.value == 0){ this.value=''; }" />
   </div>
 </form>
