@@ -12,13 +12,13 @@
 </div>
 <div class="row">
   <div class="col-md-4">
-    <span>${{results.purchasePrice}}</span>
+    <span>{{results.purchasePrice | tostring:0:true}}</span>
   </div>
   <div class="col-md-4">
-    <span>${{results.totalCost}}</span>
+    <span>{{results.totalCost}}</span>
   </div>
   <div class="col-md-4">
-    <span>${{results.cashOutlay}}</span>
+    <span>{{results.cashOutlay}}</span>
   </div>
 </div>
 <h4>Income</h4>
@@ -32,10 +32,10 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <span>${{results.gross.revenueMonth}}</span>
+    <span>{{results.gross.revenueMonth}}</span>
   </div>
   <div class="col-md-6">
-    <span>${{results.gross.revenueYear}}</span>
+    <span>{{results.gross.revenueYear}}</span>
   </div>
 </div>
 <div class="row">
@@ -48,10 +48,10 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <span>${{results.gross.incomeMonth}}</span>
+    <span>{{results.gross.incomeMonth}}</span>
   </div>
   <div class="col-md-6">
-    <span>${{results.gross.incomeYear}}</span>
+    <span>{{results.gross.incomeYear}}</span>
   </div>
 </div>
 
@@ -66,10 +66,10 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <span>${{results.expenses.month}}</span>
+    <span>{{results.expenses.month}}</span>
   </div>
   <div class="col-md-6">
-    <span>${{results.expenses.year}}</span>
+    <span>{{results.expenses.year}}</span>
   </div>
 </div>
 
@@ -87,13 +87,13 @@
 </div>
 <div class="row">
   <div class="col-md-4">
-    <span>${{results.keyFactors.noi}}</span>
+    <span>{{results.keyFactors.noi}}</span>
   </div>
   <div class="col-md-4">
-    <span>${{results.keyFactors.cashFlowMonth}}</span>
+    <span>{{results.keyFactors.cashFlowMonth}}</span>
   </div>
   <div class="col-md-4">
-    <span>${{results.keyFactors.cashFlowYear}}</span>
+    <span>{{results.keyFactors.cashFlowYear}}</span>
   </div>
 </div>
 <div class="row">
@@ -109,13 +109,13 @@
 </div>
 <div class="row">
   <div class="col-md-4">
-    <span>${{results.keyFactors.cashROI}}</span>
+    <span>{{results.keyFactors.cashROI}}</span>
   </div>
   <div class="col-md-4">
-    <span>${{results.keyFactors.totalROI}}</span>
+    <span>{{results.keyFactors.totalROI}}</span>
   </div>
   <div class="col-md-4">
-    <span>${{results.keyFactors.capRate}}</span>
+    <span>{{results.keyFactors.capRate}}</span>
   </div>
 </div>
 <div class="row">
@@ -128,10 +128,10 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <span>${{results.keyFactors.grm}}</span>
+    <span>{{results.keyFactors.grm}}</span>
   </div>
   <div class="col-md-6">
-    <span>${{results.keyFactors.dscr}}</span>
+    <span>{{results.keyFactors.dscr}}</span>
   </div>
 </div>
 <div class="row">
@@ -153,9 +153,9 @@
     </select>
   </div>
   <div class="col-md-4">
-    <span>${{results.totalEquity}}</span>
+    <span>{{results.totalEquity}}</span>
   </div>
   <div class="col-md-4">
-    <span>${{results.propertyValue}}</span>
+    <span>{{results.propertyValue}}</span>
   </div>
 </div>
