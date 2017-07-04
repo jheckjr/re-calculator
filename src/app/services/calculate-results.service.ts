@@ -12,6 +12,7 @@ export class CalculateResultsService {
       purchasePrice: 0,
       totalCost: 0,
       cashOutlay: 0,
+      arv: 0,
       gross: {
         revenueMonth: 0,
         revenueYear: 0,
@@ -32,8 +33,8 @@ export class CalculateResultsService {
         grm: 0,
         dscr: 0
       },
-      totalEquity: 0,
-      propertyValue: 0
+      amortSchedule: [],
+      appreciationRate: 0
     };
   }
 
@@ -51,6 +52,7 @@ export class CalculateResultsService {
       purchaseInfo.purchasePrice * (purchaseInfo.loanInfo.downPmtPct / 100);
     this.results.cashOutlay = this.cashOutlay(downPmtAmt, purchaseInfo.closingCosts,
       purchaseInfo.repairCosts);
+    this.results.arv = purchaseInfo.arv;
 
     // Monthly gross revenue
     let grossRev = this.grossRevenue(rentalInfo.rents);
@@ -95,9 +97,9 @@ export class CalculateResultsService {
       this.results.gross.revenueYear);
     this.results.keyFactors.dscr = this.debtSCRatio(this.results.keyFactors.noi, loanPmt)
 
-    this.results.propertyValue = purchaseInfo.arv + this.appreciation(this.results.totalCost,
-      rentalInfo.growth.appreciation, 0);
-    this.results.totalEquity = this.results.propertyValue - amortSchedule[1];
+    this.results.amortSchedule = amortSchedule;
+    this.results.appreciationRate = rentalInfo.growth.appreciation / 100;
+    
     return this.results;
   }
 

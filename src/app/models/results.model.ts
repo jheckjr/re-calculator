@@ -2,6 +2,7 @@ export interface Results {
   purchasePrice: number;
   totalCost: number;
   cashOutlay: number;
+  arv: number;
   gross: {
     revenueMonth: number,
     revenueYear: number,
@@ -22,6 +23,6 @@ export interface Results {
     grm: number,
     dscr: number
   };
-  totalEquity: number;
-  propertyValue: number;
+  amortSchedule: number[];
+  appreciationRate: number;
 };

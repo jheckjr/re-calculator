@@ -15,10 +15,10 @@
     <span>{{results.purchasePrice | tostring:0:true}}</span>
   </div>
   <div class="col-md-4">
-    <span>{{results.totalCost}}</span>
+    <span>{{results.totalCost | tostring:0:true}}</span>
   </div>
   <div class="col-md-4">
-    <span>{{results.cashOutlay}}</span>
+    <span>{{results.cashOutlay | tostring:0:true}}</span>
   </div>
 </div>
 <h4>Income</h4>
@@ -32,10 +32,10 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <span>{{results.gross.revenueMonth}}</span>
+    <span>{{results.gross.revenueMonth | tostring:0:true}}</span>
   </div>
   <div class="col-md-6">
-    <span>{{results.gross.revenueYear}}</span>
+    <span>{{results.gross.revenueYear | tostring:0:true}}</span>
   </div>
 </div>
 <div class="row">
@@ -48,10 +48,10 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <span>{{results.gross.incomeMonth}}</span>
+    <span>{{results.gross.incomeMonth | tostring:0:true}}</span>
   </div>
   <div class="col-md-6">
-    <span>{{results.gross.incomeYear}}</span>
+    <span>{{results.gross.incomeYear | tostring:0:true}}</span>
   </div>
 </div>
 
@@ -66,10 +66,10 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <span>{{results.expenses.month}}</span>
+    <span>{{results.expenses.month | tostring:0:true}}</span>
   </div>
   <div class="col-md-6">
-    <span>{{results.expenses.year}}</span>
+    <span>{{results.expenses.year | tostring:0:true}}</span>
   </div>
 </div>
 
@@ -87,13 +87,13 @@
 </div>
 <div class="row">
   <div class="col-md-4">
-    <span>{{results.keyFactors.noi}}</span>
+    <span>{{results.keyFactors.noi | tostring:0:true}}</span>
   </div>
   <div class="col-md-4">
-    <span>{{results.keyFactors.cashFlowMonth}}</span>
+    <span>{{results.keyFactors.cashFlowMonth | tostring:0:true}}</span>
   </div>
   <div class="col-md-4">
-    <span>{{results.keyFactors.cashFlowYear}}</span>
+    <span>{{results.keyFactors.cashFlowYear | tostring:0:true}}</span>
   </div>
 </div>
 <div class="row">
@@ -109,13 +109,13 @@
 </div>
 <div class="row">
   <div class="col-md-4">
-    <span>{{results.keyFactors.cashROI}}</span>
+    <span>{{results.keyFactors.cashROI | tostring:2:false}}</span>
   </div>
   <div class="col-md-4">
-    <span>{{results.keyFactors.totalROI}}</span>
+    <span>{{results.keyFactors.totalROI | tostring:2:false}}</span>
   </div>
   <div class="col-md-4">
-    <span>{{results.keyFactors.capRate}}</span>
+    <span>{{results.keyFactors.capRate | tostring:2:false}}</span>
   </div>
 </div>
 <div class="row">
@@ -128,10 +128,10 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <span>{{results.keyFactors.grm}}</span>
+    <span>{{results.keyFactors.grm | tostring:2:false}}</span>
   </div>
   <div class="col-md-6">
-    <span>{{results.keyFactors.dscr}}</span>
+    <span>{{results.keyFactors.dscr | tostring:2:false}}</span>
   </div>
 </div>
 <div class="row">
@@ -147,15 +147,16 @@
 </div>
 <div class="row">
   <div class="col-md-4">
-    <select>
-      <option value="1">Year 1</option>
-      <option value="2">Year 2</option>
+    <select [(ngModel)]="selectedYear">
+    	<option *ngFor="let year of years; let idx = index" [value]="idx">
+        {{year}}
+      </option>
     </select>
   </div>
   <div class="col-md-4">
-    <span>{{results.totalEquity}}</span>
+    <span>{{calcTotalEquity() | tostring:0:true}}</span>
   </div>
   <div class="col-md-4">
-    <span>{{results.propertyValue}}</span>
+    <span>{{propertyValue | tostring:0:true}}</span>
   </div>
 </div>
