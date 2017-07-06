@@ -1,6 +1,7 @@
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PurchaseInfo } from '../models';
+import { numberValidator } from '../validators';
 
 @Component({
   selector: 'app-purchase-info',
@@ -11,17 +12,25 @@ export class PurchaseInfoComponent implements OnChanges {
   @Input() purchaseInfo: PurchaseInfo;
   @Output() isValid = new EventEmitter();
   private purchaseInfoForm: FormGroup;
+  private nonPercentValidator = [Validators.required,
+    Validators.min(0),
+    Validators.max(Number.MAX_SAFE_INTEGER),
+    numberValidator];
+  private percentValidator = [Validators.required,
+    Validators.min(0),
+    Validators.max(100),
+    numberValidator];
 
   constructor(private formBuilder: FormBuilder) {
     // Build form with validators
     this.purchaseInfoForm = this.formBuilder.group({
-      'purchasePrice': [undefined, Validators.required],
-      'closingCosts': [undefined, Validators.required],
-      'repairCosts': [undefined, Validators.required],
-      'arv': [undefined, Validators.required],
-      'downPmtPct': [undefined, Validators.required],
-      'interestRate': [undefined, Validators.required],
-      'loanTerm': [undefined, Validators.required]
+      'purchasePrice': [undefined, this.nonPercentValidator],
+      'closingCosts': [undefined, this.nonPercentValidator],
+      'repairCosts': [undefined, this.nonPercentValidator],
+      'arv': [undefined, this.nonPercentValidator],
+      'downPmtPct': [undefined, this.percentValidator],
+      'interestRate': [undefined, this.percentValidator],
+      'loanTerm': [undefined, this.nonPercentValidator]
     });
     // Subscribe to form changes to determine validity
     this.purchaseInfoForm.valueChanges.subscribe(() => {

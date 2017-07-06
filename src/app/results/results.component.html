@@ -134,29 +134,34 @@
     <span>{{results.keyFactors.dscr | tostring:2:false}}</span>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-4">
-    <span>Year</span>
-  </div>
-  <div class="col-md-4">
-    <span>Total Equity</span>
-  </div>
-  <div class="col-md-4">
-    <span>Property Value</span>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    <select [(ngModel)]="selectedYear">
-    	<option *ngFor="let year of years; let idx = index" [value]="idx">
-        {{year}}
-      </option>
-    </select>
-  </div>
-  <div class="col-md-4">
-    <span>{{calcTotalEquity() | tostring:0:true}}</span>
-  </div>
-  <div class="col-md-4">
-    <span>{{propertyValue | tostring:0:true}}</span>
-  </div>
-</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        Year
+      </th>
+      <th *ngFor="let year of years; let idx = index">
+        {{idx}}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>
+        Equity
+      </th>
+      <td *ngFor="let equity of equityValues">
+        {{equity | tostring:0:true}}
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Property Value
+      </th>
+      <td *ngFor="let value of propertyValues">
+        {{value | tostring:0:true}}
+      </td>
+    </tr>
+  </tbody>
+</table>

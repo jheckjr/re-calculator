@@ -2,21 +2,21 @@
 <form [formGroup]="purchaseInfoForm" novalidate>
   <div class="form-group required">
     <label for="purchasePrice">Purchase Price</label>
-    <input type="number" min="0" formControlName="purchasePrice"
+    <input type="number" formControlName="purchasePrice"
       name="purchasePrice" [(ngModel)]="purchaseInfo.purchasePrice"
       onfocus="if(this.value == 0) { this.value = ''; }"
       onblur="if(this.value == '') { this.value = 0; }" />
   </div>
   <div class="form-group required">
     <label for="closingCosts">Closing Costs</label>
-    <input type="number" min="0" formControlName="closingCosts"
+    <input type="number" formControlName="closingCosts"
       name="closingCosts" [(ngModel)]="purchaseInfo.closingCosts"
       onfocus="if(this.value == 0) { this.value = ''; }"
       onblur="if(this.value == '') { this.value = 0; }" />
   </div>
   <div class="form-group required">
     <label for="repairCosts">Repair Costs</label>
-    <input type="number" min="0" formControlName="repairCosts"
+    <input type="number" formControlName="repairCosts"
       name="repairCosts" [(ngModel)]="purchaseInfo.repairCosts"
       onfocus="if(this.value == 0) { this.value = ''; }"
       onblur="if(this.value == '') { this.value = 0; }" />
@@ -29,7 +29,7 @@
 
   <div class="form-group required">
     <label for="arv">ARV</label>
-    <input type="number" min="0" formControlName="arv"
+    <input type="number" formControlName="arv"
       name="arv" [(ngModel)]="purchaseInfo.arv"
       onfocus="if(this.value == 0) { this.value = ''; }"
       onblur="if(this.value == '') { this.value = 0; }" />
@@ -39,7 +39,7 @@
 
   <div class="form-group required">
     <label for="downPmtPct">Downpayment (%)</label>
-    <input type="number" min="0" max="100" formControlName="downPmtPct"
+    <input type="number" formControlName="downPmtPct"
       name="downPmtPct" [(ngModel)]="purchaseInfo.loanInfo.downPmtPct"
       onfocus="if(this.value == 0) { this.value = ''; }"
       onblur="if(this.value == '') { this.value = 0; }" />
@@ -50,7 +50,7 @@
   </div>
   <div class="form-group required">
     <label for="interestRate">Interest Rate (%)</label>
-    <input type="number" min="0" max="100" formControlName="interestRate"
+    <input type="number" formControlName="interestRate"
       name="interestRate" [(ngModel)]="purchaseInfo.loanInfo.interestRate"
       onfocus="if(this.value == 0) { this.value = ''; }"
       onblur="if(this.value == '') { this.value = 0; }" />
@@ -61,7 +61,7 @@
   </div>
   <div class="form-group required">
     <label for="loanTerm">Loan Term (yrs)</label>
-    <input type="number" min="0" max="100" formControlName="loanTerm"
+    <input type="number" formControlName="loanTerm"
       name="loanTerm" [(ngModel)]="purchaseInfo.loanInfo.loanTerm"
       onfocus="if(this.value == 0) { this.value = ''; }"
       onblur="if(this.value == '') { this.value = 0; }" />

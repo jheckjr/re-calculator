@@ -19,9 +19,9 @@ export class RentalInfoComponent implements OnChanges {
     this.rentalInfoForm = this.formBuilder.group({
       'numUnits': [undefined, Validators.required],
       'unit1': [undefined, Validators.required],
-      'unit2': [undefined, Validators.required],
-      'unit3': [undefined, Validators.required],
-      'unit4': [undefined, Validators.required],
+      'unit2': [undefined, Validators.min(-1)],
+      'unit3': [undefined, Validators.min(-1)],
+      'unit4': [undefined, Validators.min(-1)],
       'otherIncome': [undefined, Validators.required],
       'vacancyRate': [undefined, Validators.required],
       'electric': [undefined, Validators.required],
