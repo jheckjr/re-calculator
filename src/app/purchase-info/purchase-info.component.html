@@ -1,20 +1,20 @@
 <h3>Purchase Info</h3>
 <form [formGroup]="purchaseInfoForm" novalidate>
-  <div class="form-group required">
+  <div class="form-group">
     <label for="purchasePrice">Purchase Price</label>
     <input type="number" formControlName="purchasePrice"
       name="purchasePrice" [(ngModel)]="purchaseInfo.purchasePrice"
       onfocus="if(this.value == 0) { this.value = ''; }"
       onblur="if(this.value == '') { this.value = 0; }" />
   </div>
-  <div class="form-group required">
+  <div class="form-group">
     <label for="closingCosts">Closing Costs</label>
     <input type="number" formControlName="closingCosts"
       name="closingCosts" [(ngModel)]="purchaseInfo.closingCosts"
       onfocus="if(this.value == 0) { this.value = ''; }"
       onblur="if(this.value == '') { this.value = 0; }" />
   </div>
-  <div class="form-group required">
+  <div class="form-group">
     <label for="repairCosts">Repair Costs</label>
     <input type="number" formControlName="repairCosts"
       name="repairCosts" [(ngModel)]="purchaseInfo.repairCosts"
@@ -27,7 +27,7 @@
     <span>{{totalCost()}}</span>
   </div>
 
-  <div class="form-group required">
+  <div class="form-group">
     <label for="arv">ARV</label>
     <input type="number" formControlName="arv"
       name="arv" [(ngModel)]="purchaseInfo.arv"
@@ -37,7 +37,7 @@
 
   <h4>Loan Info</h4>
 
-  <div class="form-group required">
+  <div class="form-group">
     <label for="downPmtPct">Downpayment (%)</label>
     <input type="number" formControlName="downPmtPct"
       name="downPmtPct" [(ngModel)]="purchaseInfo.loanInfo.downPmtPct"
@@ -48,7 +48,7 @@
     <span>Downpayment Amount</span>
     <span>{{downPmtAmt()}}</span>
   </div>
-  <div class="form-group required">
+  <div class="form-group">
     <label for="interestRate">Interest Rate (%)</label>
     <input type="number" formControlName="interestRate"
       name="interestRate" [(ngModel)]="purchaseInfo.loanInfo.interestRate"
@@ -59,7 +59,7 @@
     <span>Loan Amount</span>
     <span>{{loanAmt()}}</span>
   </div>
-  <div class="form-group required">
+  <div class="form-group">
     <label for="loanTerm">Loan Term (yrs)</label>
     <input type="number" formControlName="loanTerm"
       name="loanTerm" [(ngModel)]="purchaseInfo.loanInfo.loanTerm"

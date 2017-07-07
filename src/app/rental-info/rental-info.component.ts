@@ -1,6 +1,7 @@
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { RentalInfo } from '../models';
+import { numberValidator } from '../validators';
 
 @Component({
   selector: 'app-rental-info',
@@ -13,30 +14,38 @@ export class RentalInfoComponent implements OnChanges {
   private unitOptions = [1, 2, 3, 4];
   private unitNames = ['unit1', 'unit2', 'unit3', 'unit4'];
   private rentalInfoForm: FormGroup;
+  private nonPercentValidator = [Validators.required,
+    Validators.min(0),
+    Validators.max(Number.MAX_SAFE_INTEGER),
+    numberValidator];
+  private percentValidator = [Validators.required,
+    Validators.min(0),
+    Validators.max(100),
+    numberValidator];
 
   constructor(private formBuilder: FormBuilder) {
     // Build form with validators
     this.rentalInfoForm = this.formBuilder.group({
       'numUnits': [undefined, Validators.required],
-      'unit1': [undefined, Validators.required],
-      'unit2': [undefined, Validators.min(-1)],
-      'unit3': [undefined, Validators.min(-1)],
-      'unit4': [undefined, Validators.min(-1)],
-      'otherIncome': [undefined, Validators.required],
-      'vacancyRate': [undefined, Validators.required],
-      'electric': [undefined, Validators.required],
-      'gas': [undefined, Validators.required],
-      'water': [undefined, Validators.required],
-      'sewer': [undefined, Validators.required],
-      'trash': [undefined, Validators.required],
-      'other': [undefined, Validators.required],
-      'repairs': [undefined, Validators.required],
-      'propMgmt': [undefined, Validators.required],
-      'propTax': [undefined, Validators.required],
-      'insurance': [undefined, Validators.required],
-      'revenue': [undefined, Validators.required],
-      'expenses': [undefined, Validators.required],
-      'appreciation': [undefined, Validators.required]
+      'unit1': [undefined, this.nonPercentValidator],
+      'unit2': undefined,
+      'unit3': undefined,
+      'unit4': undefined,
+      'otherIncome': [undefined, this.nonPercentValidator],
+      'vacancyRate': [undefined, this.percentValidator],
+      'electric': [undefined, this.nonPercentValidator],
+      'gas': [undefined, this.nonPercentValidator],
+      'water': [undefined, this.nonPercentValidator],
+      'sewer': [undefined, this.nonPercentValidator],
+      'trash': [undefined, this.nonPercentValidator],
+      'other': [undefined, this.nonPercentValidator],
+      'repairs': [undefined, this.percentValidator],
+      'propMgmt': [undefined, this.percentValidator],
+      'propTax': [undefined, this.nonPercentValidator],
+      'insurance': [undefined, this.nonPercentValidator],
+      'revenue': [undefined, this.percentValidator],
+      'expenses': [undefined, this.percentValidator],
+      'appreciation': [undefined, this.percentValidator]
     });
     // Subscribe to form changes to determine validity
     this.rentalInfoForm.valueChanges.subscribe(() => {

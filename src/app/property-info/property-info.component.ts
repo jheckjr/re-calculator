@@ -1,6 +1,7 @@
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PropertyInfo, State } from '../models';
+import { zipCodeValidator } from '../validators';
 
 @Component({
   selector: 'app-property-info',
@@ -16,15 +17,15 @@ export class PropertyInfoComponent implements OnChanges {
   constructor(private formBuilder: FormBuilder) {
     // Build form with validators
     this.propertyInfoForm = this.formBuilder.group({
-      'reportName': [undefined, Validators.required],
-      'street': undefined,
-      'city': undefined,
+      'reportName': [undefined, [Validators.required, Validators.maxLength(255)]],
+      'street': [undefined, Validators.maxLength(255)],
+      'city': [undefined, Validators.maxLength(255)],
       'state': undefined,
-      'zip': undefined,
-      'description': undefined,
-      'mls': undefined,
-      'notes': undefined,
-      'imageName': undefined
+      'zip': [undefined, zipCodeValidator],
+      'description': [undefined, Validators.maxLength(3000)],
+      'mls': [undefined, Validators.maxLength(32)],
+      'notes': [undefined, Validators.maxLength(3000)],
+      'imageName': [undefined, Validators.maxLength(255)]
     });
     // Subscribe to form changes to determine validity
     this.propertyInfoForm.valueChanges.subscribe(() => {
