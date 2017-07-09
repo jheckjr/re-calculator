@@ -54,7 +54,7 @@ export class RentalInfoComponent implements OnChanges {
       	this.rentalInfo.rents[idx] = 0;
       }
       
-      if (this.rentalInfoForm.valid) {
+      if (this.rentalInfoForm.valid && this.rentalInfoForm.dirty) {
         this.isValid.emit(true);
       } else {
         this.isValid.emit(false);

@@ -34,7 +34,7 @@ export class PurchaseInfoComponent implements OnChanges {
     });
     // Subscribe to form changes to determine validity
     this.purchaseInfoForm.valueChanges.subscribe(() => {
-      if (this.purchaseInfoForm.valid) {
+      if (this.purchaseInfoForm.valid && this.purchaseInfoForm.dirty) {
         this.isValid.emit(true);
       } else {
         this.isValid.emit(false);
