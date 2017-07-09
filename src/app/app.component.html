@@ -1,10 +1,12 @@
-<h1>
-  {{title}}
-</h1>
-<app-property-info [propertyInfo]="state.propertyInfo"
-  (isValid)="propertyInfoValid = $event"></app-property-info>
-<app-purchase-info [purchaseInfo]="state.purchaseInfo"
-  (isValid)="purchaseInfoValid = $event"></app-purchase-info>
-<app-rental-info [rentalInfo]="state.rentalInfo"
-  (isValid)="rentalInfoValid = $event"></app-rental-info>
-<app-results [results]="results" *ngIf="formIsValid()"></app-results>
+<div class="container">
+  <h1>
+    {{title}}
+  </h1>
+  <app-property-info [propertyInfo]="state.propertyInfo"
+    (isValid)="propertyInfoValid = $event"></app-property-info>
+  <app-purchase-info [purchaseInfo]="state.purchaseInfo"
+    (isValid)="purchaseInfoValid = $event"></app-purchase-info>
+  <app-rental-info [rentalInfo]="state.rentalInfo"
+    (isValid)="rentalInfoValid = $event"></app-rental-info>
+  <app-results [results]="results" *ngIf="formIsValid()"></app-results>
+</div>

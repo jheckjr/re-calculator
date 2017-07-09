@@ -1,52 +1,73 @@
 <h3>Property Info</h3>
 <form [formGroup]="propertyInfoForm" novalidate>
-  <div class="form-group">
-    <label for="name">Report Name</label>
-    <input type="text" formControlName="reportName"
-      name="name" [(ngModel)]="propertyInfo.reportName" />
+  <div class="form-group row">
+    <div class="col-sm-4">
+      <label for="name">Report Name</label>
+      <input type="text" formControlName="reportName"
+        name="name" [(ngModel)]="propertyInfo.reportName" 
+        class="form-control" />
+    </div>
   </div>
-  <div class="form-group">
-    <label for="street">Street</label>
-    <input type="text" formControlName="street"
-      name="street" [(ngModel)]="propertyInfo.address.street" />
+  <div class="form-group row">
+    <div class="col-sm-4">
+      <label for="street">Street</label>
+      <input type="text" formControlName="street"
+        name="street" [(ngModel)]="propertyInfo.address.street"
+        class="form-control"/>
+    </div>
+    <div class="col-sm-3">
+      <label for="city">City</label>
+      <input type="text" formControlName="city"
+        name="city" [(ngModel)]="propertyInfo.address.city"
+        class="form-control" />
+    </div>
+    <div class="col-sm-2">
+      <label for="state">State</label>
+      <select formControlName="state" name="state"
+        [(ngModel)]="propertyInfo.address.state" 
+        class="form-control" >
+        <option *ngFor="let item of states | enumKeys" [value]="item.key">
+          {{item.value}}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-2">
+      <label for="zip">Zip</label>
+      <input type="text" formControlName="zip"
+        name="zip" [(ngModel)]="propertyInfo.address.zip"
+        class="form-control" />
+    </div>
   </div>
-  <div class="form-group">
-    <label for="city">City</label>
-    <input type="text" formControlName="city"
-      name="city" [(ngModel)]="propertyInfo.address.city" />
+  <div class="form-group row">
+    <div class="col-sm-6">
+      <label for="description">Sales Description</label>
+      <textarea formControlName="description"
+        name="description" [(ngModel)]="propertyInfo.salesDescription"
+        class="form-control"></textarea>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="state">State</label>
-    <select formControlName="state" name="state"
-      [(ngModel)]="propertyInfo.address.state" >
-      <option *ngFor="let item of states | enumKeys" [value]="item.key">
-        {{item.value}}
-      </option>
-    </select>
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <label for="mls">MLS #</label>
+      <input type="number" formControlName="mls"
+        name="mls" [(ngModel)]="propertyInfo.mlsNumber"
+        class="form-control" />
+    </div>
   </div>
-  <div class="form-group">
-    <label for="zip">Zip</label>
-    <input type="text" formControlName="zip"
-      name="zip" [(ngModel)]="propertyInfo.address.zip" />
+  <div class="form-group row">
+    <div class="col-sm-6">
+      <label for="notes">Notes</label>
+      <textarea formControlName="notes"
+        name="notes" [(ngModel)]="propertyInfo.userNotes"
+        class="form-control"></textarea>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="description">Sales Description</label>
-    <textarea formControlName="description" rows="10" cols="50"
-      name="description" [(ngModel)]="propertyInfo.salesDescription"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="mls">MLS #</label>
-    <input type="number" formControlName="mls"
-      name="mls" [(ngModel)]="propertyInfo.mlsNumber" />
-  </div>
-  <div class="form-group">
-    <label for="notes">Notes</label>
-    <textarea formControlName="notes" rows="10" cols="50"
-      name="notes" [(ngModel)]="propertyInfo.userNotes"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="imageName">Picture</label>
-    <input type="file" formControlName="imageName" accept="image/*"
-      name="imageName" [(ngModel)]="propertyInfo.imageName" />
+  <div class="form-group row">
+    <div class="col-sm-4">
+      <label for="imageName">Picture</label>
+      <input type="file" formControlName="imageName" accept="image/*"
+        name="imageName" [(ngModel)]="propertyInfo.imageName"
+        class="form-control btn" />
+    </div>
   </div>
 </form>

@@ -1,5 +1,5 @@
 <h3>Purchase Info</h3>
-<form [formGroup]="purchaseInfoForm" novalidate>
+<form [formGroup]="purchaseInfoForm" class="form-horizontal" novalidate>
   <div class="form-group">
     <label for="purchasePrice">Purchase Price</label>
     <input type="number" formControlName="purchasePrice"
@@ -16,7 +16,8 @@
     <label for="repairCosts">Repair Costs</label>
     <input type="number" formControlName="repairCosts"
       name="repairCosts" [(ngModel)]="purchaseInfo.repairCosts"
-      (blur)="update(['repairCosts'])" />
+      (blur)="update(['repairCosts'])"
+      class="form-control" />
   </div>
 
   <div>
