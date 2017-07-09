@@ -28,7 +28,7 @@ export class PropertyInfoComponent implements OnChanges {
       'imageName': [undefined, Validators.maxLength(255)]
     });
     // Subscribe to form changes to determine validity
-    this.propertyInfoForm.valueChanges.subscribe(() => {
+    this.propertyInfoForm.statusChanges.subscribe(() => {
       if (this.propertyInfoForm.valid) {
         this.isValid.emit(true);
       } else {

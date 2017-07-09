@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 const ZIP_REGEXP = /\d{5}/;
 
@@ -21,3 +21,12 @@ export function zipCodeValidator(control: FormControl): {[key: string]: any} {
   return ZIP_REGEXP.test(control.value) ? null : 
     { zipCodeValidator: { valid: false } };
 }
+
+export const nonPercentValidator = [Validators.required,
+  Validators.min(0),
+  Validators.max(Number.MAX_SAFE_INTEGER),
+  numberValidator];
+export const percentValidator = [Validators.required,
+    Validators.min(0),
+    Validators.max(100),
+    numberValidator];

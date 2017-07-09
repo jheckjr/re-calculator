@@ -48,7 +48,7 @@ export class RentalInfoComponent {
       'appreciation': [undefined, this.percentValidator]
     });
     // Subscribe to form changes to determine validity
-    this.rentalInfoForm.valueChanges.subscribe(() => {
+    this.rentalInfoForm.statusChanges.subscribe(() => {
       for (let idx = this.rentalInfo.numUnits; 
         idx < this.rentalInfo.rents.length; idx++) {
       	this.rentalInfo.rents[idx] = 0;
