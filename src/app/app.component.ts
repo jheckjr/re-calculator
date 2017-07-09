@@ -42,22 +42,24 @@ export class AppComponent {
 
   private updateState() {
     this.state = this.store.getState();
-    this.resultsAreVisible = false;
   }
 
-  private isFormValid(): boolean {
-    return (this.propertyInfoValid && this.purchaseInfoValid &&
-      this.rentalInfoValid);
+  private formIsValid(): boolean {
+    const isValid = this.propertyInfoValid && this.purchaseInfoValid &&
+      this.rentalInfoValid;
+    if (isValid) {
+      this.updateResults();
+    }
+    
+    return isValid;
   }
 
-  private submitInfo(event: any) {
+  private updateResults() {
     // Save state
     this.storeDispatch(this.state);
 
     // Calculate and display results
     this.results = this.resultsService.calcResults(this.state.purchaseInfo,
       this.state.rentalInfo);
-    this.resultsAreVisible = true;
-    event.preventDefault();
   }
 }

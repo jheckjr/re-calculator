@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { RentalInfo } from '../models';
 import { numberValidator } from '../validators';
@@ -8,7 +8,7 @@ import { numberValidator } from '../validators';
   templateUrl: './rental-info.component.html',
   styleUrls: ['./rental-info.component.css']
 })
-export class RentalInfoComponent implements OnChanges {
+export class RentalInfoComponent {
   @Input() rentalInfo: RentalInfo;
   @Output() isValid = new EventEmitter();
   private unitOptions = [1, 2, 3, 4];
@@ -54,40 +54,12 @@ export class RentalInfoComponent implements OnChanges {
       	this.rentalInfo.rents[idx] = 0;
       }
       
-      if (this.rentalInfoForm.valid && this.rentalInfoForm.dirty) {
+      if (this.rentalInfoForm.valid) {
         this.isValid.emit(true);
       } else {
         this.isValid.emit(false);
       }
     });
-  }
-
-  ngOnChanges() {
-    if (!this.rentalInfo) {
-      this.rentalInfo = {
-        numUnits: 1,
-        rents: [0, 0, 0, 0],
-        otherIncome: 0,
-        vacancyRate: 0,
-        expenses: {
-          electric: 0,
-          gas: 0,
-          water: 0,
-          sewer: 0,
-          trash: 0,
-          other: 0,
-          repairs: 0,
-          propMgmt: 0,
-          propTax: 0,
-          insurance: 0
-        },
-        growth: {
-          revenue: 0,
-          expenses: 0,
-          appreciation: 0
-        }
-      };
-    }
   }
   
   private totalRent() {

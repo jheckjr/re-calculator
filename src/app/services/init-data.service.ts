@@ -23,38 +23,38 @@ export class InitDataService {
     };
 
     this.purchaseInfo = {
-      purchasePrice: 0,
-      closingCosts: 0,
-      repairCosts: 0,
-      arv: 0,
+      purchasePrice: undefined,
+      closingCosts: undefined,
+      repairCosts: undefined,
+      arv: undefined,
       loanInfo: {
-        downPmtPct: 0,
-        interestRate: 0,
-        loanTerm: 0
+        downPmtPct: undefined,
+        interestRate: undefined,
+        loanTerm: undefined
       }
     };
 
     this.rentalInfo = {
       numUnits: 1,
-      rents: [0],
-      otherIncome: 0,
-      vacancyRate: 0,
+      rents: [undefined],
+      otherIncome: undefined,
+      vacancyRate: undefined,
       expenses: {
-        electric: 0,
-        gas: 0,
-        water: 0,
-        sewer: 0,
-        trash: 0,
-        other: 0,
-        repairs: 0,
-        propMgmt: 0,
-        propTax: 0,
-        insurance: 0
+        electric: undefined,
+        gas: undefined,
+        water: undefined,
+        sewer: undefined,
+        trash: undefined,
+        other: undefined,
+        repairs: undefined,
+        propMgmt: undefined,
+        propTax: undefined,
+        insurance: undefined
       },
       growth: {
-        revenue: 0,
-        expenses: 0,
-        appreciation: 0
+        revenue: undefined,
+        expenses: undefined,
+        appreciation: undefined
       }
     };
   }

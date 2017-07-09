@@ -7,5 +7,4 @@
   (isValid)="purchaseInfoValid = $event"></app-purchase-info>
 <app-rental-info [rentalInfo]="state.rentalInfo"
   (isValid)="rentalInfoValid = $event"></app-rental-info>
-<button [disabled]="!isFormValid()" (click)="submitInfo($event)">Submit</button>
-<app-results [results]="results" *ngIf="resultsAreVisible"></app-results>
+<app-results [results]="results" *ngIf="formIsValid()"></app-results>

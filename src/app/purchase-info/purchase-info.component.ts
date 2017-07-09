@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PurchaseInfo } from '../models';
 import { numberValidator } from '../validators';
@@ -8,7 +8,7 @@ import { numberValidator } from '../validators';
   templateUrl: './purchase-info.component.html',
   styleUrls: ['./purchase-info.component.css']
 })
-export class PurchaseInfoComponent implements OnChanges {
+export class PurchaseInfoComponent {
   @Input() purchaseInfo: PurchaseInfo;
   @Output() isValid = new EventEmitter();
   private purchaseInfoForm: FormGroup;
@@ -34,28 +34,12 @@ export class PurchaseInfoComponent implements OnChanges {
     });
     // Subscribe to form changes to determine validity
     this.purchaseInfoForm.valueChanges.subscribe(() => {
-      if (this.purchaseInfoForm.valid && this.purchaseInfoForm.dirty) {
+      if (this.purchaseInfoForm.valid) {
         this.isValid.emit(true);
       } else {
         this.isValid.emit(false);
       }
     });
-  }
-
-  ngOnChanges() {
-    if (!this.purchaseInfo) {
-      this.purchaseInfo = {
-        purchasePrice: 0,
-        closingCosts: 0,
-        repairCosts: 0,
-        arv: 0,
-        loanInfo: {
-          downPmtPct: 0,
-          interestRate: 0,
-          loanTerm: 0
-        }
-      };
-    }
   }
   
   // Total cost of cash purchase
