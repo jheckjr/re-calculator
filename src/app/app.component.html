@@ -2,8 +2,15 @@
   <h1>
     {{title}}
   </h1>
-  <app-property-info [propertyInfo]="state.propertyInfo"
-    (isValid)="propertyInfoValid = $event"></app-property-info>
+  <h4>
+    <a data-toggle="collapse" href="#propertyInfo">
+      Property Info
+    </a>
+  </h4>
+  <div id="propertyInfo" class="collapse in">
+    <app-property-info [propertyInfo]="state.propertyInfo"
+      (isValid)="propertyInfoValid = $event"></app-property-info>
+  </div>
   <app-purchase-info [purchaseInfo]="state.purchaseInfo"
     (isValid)="purchaseInfoValid = $event"></app-purchase-info>
   <app-rental-info [rentalInfo]="state.rentalInfo"

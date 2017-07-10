@@ -1,7 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { RentalInfo } from '../models';
-import { numberValidator } from '../validators';
+import { numberValidator, 
+  nonPercentValidator, 
+  percentValidator 
+} from '../validators';
 
 @Component({
   selector: 'app-rental-info',
@@ -13,39 +16,32 @@ export class RentalInfoComponent {
   @Output() isValid = new EventEmitter();
   private unitOptions = [1, 2, 3, 4];
   private unitNames = ['unit1', 'unit2', 'unit3', 'unit4'];
+  private summaryInfo: any;
   private rentalInfoForm: FormGroup;
-  private nonPercentValidator = [Validators.required,
-    Validators.min(0),
-    Validators.max(Number.MAX_SAFE_INTEGER),
-    numberValidator];
-  private percentValidator = [Validators.required,
-    Validators.min(0),
-    Validators.max(100),
-    numberValidator];
 
   constructor(private formBuilder: FormBuilder) {
     // Build form with validators
     this.rentalInfoForm = this.formBuilder.group({
       'numUnits': [undefined, Validators.required],
-      'unit1': [undefined, this.nonPercentValidator],
+      'unit1': [undefined, nonPercentValidator],
       'unit2': undefined,
       'unit3': undefined,
       'unit4': undefined,
-      'otherIncome': [undefined, this.nonPercentValidator],
-      'vacancyRate': [undefined, this.percentValidator],
-      'electric': [undefined, this.nonPercentValidator],
-      'gas': [undefined, this.nonPercentValidator],
-      'water': [undefined, this.nonPercentValidator],
-      'sewer': [undefined, this.nonPercentValidator],
-      'trash': [undefined, this.nonPercentValidator],
-      'other': [undefined, this.nonPercentValidator],
-      'repairs': [undefined, this.percentValidator],
-      'propMgmt': [undefined, this.percentValidator],
-      'propTax': [undefined, this.nonPercentValidator],
-      'insurance': [undefined, this.nonPercentValidator],
-      'revenue': [undefined, this.percentValidator],
-      'expenses': [undefined, this.percentValidator],
-      'appreciation': [undefined, this.percentValidator]
+      'otherIncome': [undefined, nonPercentValidator],
+      'vacancyRate': [undefined, percentValidator],
+      'electric': [undefined, nonPercentValidator],
+      'gas': [undefined, nonPercentValidator],
+      'water': [undefined, nonPercentValidator],
+      'sewer': [undefined, nonPercentValidator],
+      'trash': [undefined, nonPercentValidator],
+      'other': [undefined, nonPercentValidator],
+      'repairs': [undefined, percentValidator],
+      'propMgmt': [undefined, percentValidator],
+      'propTax': [undefined, nonPercentValidator],
+      'insurance': [undefined, nonPercentValidator],
+      'revenue': [undefined, percentValidator],
+      'expenses': [undefined, percentValidator],
+      'appreciation': [undefined, percentValidator]
     });
     // Subscribe to form changes to determine validity
     this.rentalInfoForm.statusChanges.subscribe(() => {
@@ -60,13 +56,45 @@ export class RentalInfoComponent {
         this.isValid.emit(false);
       }
     });
+    this.summaryInfo = {
+      totalRent: '',
+      totalUtilities: ''
+    };
+  }
+
+  private update(keys) {
+    // Set item to zero if input is empty by moving through layers of purchaseInfo
+    // by key name
+    keys.reduce((obj, key, idx, array) => {
+      if (idx === array.length - 1) {
+        if (!obj[key]) {
+          obj[key] = 0;
+        }
+      } else {
+        return obj[key];
+      }
+    }, this.rentalInfo);
+    
+    this.updateTotalRent();
+    this.updateTotalUtilities();
   }
   
-  private totalRent() {
+  private updateTotalRent() {
   	const unitRents = this.rentalInfo.rents.slice(0, this.rentalInfo.numUnits);
   	const rent = unitRents.reduce((total, unitRent) => 
   	  total + (unitRent || 0), 0);
   	const strRent = rent.toFixed(0);
-  	return '$' + Number(strRent).toLocaleString();
+  	this.summaryInfo.totalRent = '$' + Number(strRent).toLocaleString();
+  }
+  
+  private updateTotalUtilities() {
+    const totalUtilities = (this.rentalInfo.expenses.electric || 0) +
+      (this.rentalInfo.expenses.gas || 0) +
+      (this.rentalInfo.expenses.water || 0) +
+      (this.rentalInfo.expenses.sewer || 0) +
+      (this.rentalInfo.expenses.trash || 0) +
+      (this.rentalInfo.expenses.other || 0);
+    const strUtilities = totalUtilities.toFixed(0);
+    this.summaryInfo.totalUtilities = '$' + Number(strUtilities).toLocaleString();
   }
 }

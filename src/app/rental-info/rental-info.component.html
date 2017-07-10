@@ -1,135 +1,160 @@
 <h3>Rental Info</h3>
-<form [formGroup]="rentalInfoForm" class="form-horizontal" novalidate>
-  <div class="form-group">
-    <label for="numUnits">Number of Units</label>
-    <select name="numUnits" formControlName="numUnits"
-      [(ngModel)]="rentalInfo.numUnits" [value]="unitOptions[0]">
-      <option *ngFor="let units of unitOptions" [value]="units">
-        {{units}}
-      </option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="unit">Monthly Unit Rents</label>
-    <div *ngFor="let unit of unitNames; index as idx">
-      <input type="number" *ngIf="idx < rentalInfo.numUnits"
-        [formControlName]="unitNames[idx]" [(ngModel)]="rentalInfo.rents[idx]"
-        onfocus="if(this.value == 0) { this.value = ''; }"
-        onblur="if(this.value == '') { this.value = 0; }" />
+<form [formGroup]="rentalInfoForm" novalidate>
+  <h4>Rental Income</h4>
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <label for="numUnits">Number of Units</label>
+      <select name="numUnits" formControlName="numUnits"
+        [(ngModel)]="rentalInfo.numUnits" [value]="unitOptions[0]"
+        class="form-control">
+        <option *ngFor="let units of unitOptions" [value]="units">
+          {{units}}
+        </option>
+      </select>
     </div>
   </div>
-  <div>
-    <label for="totalRent">Total Rent</label>
-    <span name="totalRent">{{totalRent()}}</span>
+  <div class="form-group row">
+    <div *ngFor="let unit of unitNames; let idx = index" class="col-sm-2">
+      <label [for]="unitNames[idx]" *ngIf="idx < rentalInfo.numUnits">
+        Unit {{idx+1}}
+      </label>
+      <input type="number" [name]="unitNames[idx]" *ngIf="idx < rentalInfo.numUnits"
+        [formControlName]="unitNames[idx]" [(ngModel)]="rentalInfo.rents[idx]"
+        class="form-control"/>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <label for="totalRent">Total Rent</label>
+      <span name="totalRent">{{summaryInfo.totalRent}}</span>
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="otherIncome">Other Income</label>
-    <input type="number" formControlName="otherIncome"
-      name="otherIncome" [(ngModel)]="rentalInfo.otherIncome" 
-      onfocus="if(this.value == 0) { this.value = ''; }"
-      onblur="if(this.value == '') { this.value = 0; }" />
+  <div class="form-group row">
+    <div class="col-sm-2">
+      <label for="otherIncome">Other Income</label>
+      <input type="number" formControlName="otherIncome"
+        name="otherIncome" [(ngModel)]="rentalInfo.otherIncome" 
+        (blur)="update(['otherIncome'])"
+        class="form-control" />
+    </div>
   </div>
-  <div class="form-group">
-    <label for="vacancyRate">Vacancy Rate (%)</label>
-    <input type="number" formControlName="vacancyRate"
-      name="vacancyRate" [(ngModel)]="rentalInfo.vacancyRate"
-      onfocus="if(this.value == 0) { this.value = ''; }"
-      onblur="if(this.value == '') { this.value = 0; }" />
+  <div class="form-group row">
+    <div class="col-sm-2">
+      <label for="vacancyRate">Vacancy Rate (%)</label>
+      <input type="number" formControlName="vacancyRate"
+        name="vacancyRate" [(ngModel)]="rentalInfo.vacancyRate"
+        (blur)="update(['vacancyRate'])"
+        class="form-control" />
+    </div>
   </div>
 
   <h4>Owner Expenses (Annual)</h4>
-  <div class="form-group">
-    <label for="electric">Electric</label>
-    <input type="number" formControlName="electric"
-      name="electric" [(ngModel)]="rentalInfo.expenses.electric"
-      onfocus="if(this.value == 0) { this.value = ''; }"
-      onblur="if(this.value == '') { this.value = 0; }" />
+  <div class="form-group row">
+    <div class="col-sm-2">
+      <label for="electric">Electric</label>
+      <input type="number" formControlName="electric"
+        name="electric" [(ngModel)]="rentalInfo.expenses.electric"
+        (blur)="update(['expenses', 'electric'])"
+        class="form-control" />
+    </div>
+    <div class="col-sm-2">
+      <label for="gas">Gas</label>
+      <input type="number" formControlName="gas"
+        name="gas" [(ngModel)]="rentalInfo.expenses.gas"
+        (blur)="update(['expenses', 'gas'])"
+        class="form-control" />
+    </div>
+    <div class="col-sm-2">
+      <label for="water">Water</label>
+      <input type="number" formControlName="water"
+        name="water" [(ngModel)]="rentalInfo.expenses.water"
+        (blur)="update(['expenses', 'water'])"
+        class="form-control" />
+    </div>
+    <div class="col-sm-2">
+      <label for="sewer">Sewer</label>
+      <input type="number" formControlName="sewer"
+        name="sewer" [(ngModel)]="rentalInfo.expenses.sewer"
+        (blur)="update(['expenses', 'sewer'])"
+        class="form-control" />
+    </div>
+    <div class="col-sm-2">
+      <label for="trash">Trash</label>
+      <input type="number" formControlName="trash"
+        name="trash" [(ngModel)]="rentalInfo.expenses.trash"
+        (blur)="update(['expenses', 'trash'])"
+        class="form-control" />
+    </div>
+    <div class="col-sm-2">
+      <label for="other">Other</label>
+      <input type="number" formControlName="other"
+        name="other" [(ngModel)]="rentalInfo.expenses.other"
+        (blur)="update(['expenses', 'other'])"
+        class="form-control" />
+    </div>
   </div>
-  <div class="form-group">
-    <label for="gas">Gas</label>
-    <input type="number" formControlName="gas"
-      name="gas" [(ngModel)]="rentalInfo.expenses.gas"
-      onfocus="if(this.value == 0) { this.value = ''; }"
-      onblur="if(this.value == '') { this.value = 0; }" />
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <label for="totalUtilities">Total Utilities</label>
+      <span name="totalUtilities">{{summaryInfo.totalUtilities}}</span>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="water">Water</label>
-    <input type="number" formControlName="water"
-      name="water" [(ngModel)]="rentalInfo.expenses.water"
-      onfocus="if(this.value == 0) { this.value = ''; }"
-      onblur="if(this.value == '') { this.value = 0; }" />
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <label for="repairs">Repairs / Capex (%)</label>
+      <input type="number" formControlName="repairs"
+        name="repairs" [(ngModel)]="rentalInfo.expenses.repairs"
+        (blur)="update(['expenses', 'repairs'])"
+        class="form-control" />
+    </div>
+    <div class="col-sm-3">
+      <label for="propMgmt">Property Management (%)</label>
+      <input type="number" formControlName="propMgmt"
+        name="propMgmt" [(ngModel)]="rentalInfo.expenses.propMgmt"
+        (blur)="update(['expenses', 'propMgmt'])"
+        class="form-control" />
+    </div>
   </div>
-  <div class="form-group">
-    <label for="sewer">Sewer</label>
-    <input type="number" formControlName="sewer"
-      name="sewer" [(ngModel)]="rentalInfo.expenses.sewer"
-      onfocus="if(this.value == 0) { this.value = ''; }"
-      onblur="if(this.value == '') { this.value = 0; }" />
-  </div>
-  <div class="form-group">
-    <label for="trash">Trash</label>
-    <input type="number" formControlName="trash"
-      name="trash" [(ngModel)]="rentalInfo.expenses.trash"
-      onfocus="if(this.value == 0) { this.value = ''; }"
-      onblur="if(this.value == '') { this.value = 0; }" />
-  </div>
-  <div class="form-group">
-    <label for="other">Other</label>
-    <input type="number" formControlName="other"
-      name="other" [(ngModel)]="rentalInfo.expenses.other"
-      onfocus="if(this.value == 0) { this.value = ''; }"
-      onblur="if(this.value == '') { this.value = 0; }" />
-  </div>
-  <div class="form-group">
-    <label for="repairs">Repairs / Capex (%)</label>
-    <input type="number" formControlName="repairs"
-      name="repairs" [(ngModel)]="rentalInfo.expenses.repairs"
-      onfocus="if(this.value == 0) { this.value = ''; }"
-      onblur="if(this.value == '') { this.value = 0; }" />
-  </div>
-  <div class="form-group">
-    <label for="propMgmt">Property Management (%)</label>
-    <input type="number" formControlName="propMgmt"
-      name="propMgmt" [(ngModel)]="rentalInfo.expenses.propMgmt"
-      onfocus="if(this.value == 0) { this.value = ''; }"
-      onblur="if(this.value == '') { this.value = 0; }" />
-  </div>
-  <div class="form-group">
-    <label for="propTax">Property Tax</label>
-    <input type="number" formControlName="propTax"
-      name="propTax" [(ngModel)]="rentalInfo.expenses.propTax"
-      onfocus="if(this.value == 0) { this.value = ''; }"
-      onblur="if(this.value == '') { this.value = 0; }" />
-  </div>
-  <div class="form-group">
-    <label for="insurance">Insurance</label>
-    <input type="number" formControlName="insurance"
-      name="insurance" [(ngModel)]="rentalInfo.expenses.insurance"
-      onfocus="if(this.value == 0) { this.value = ''; }"
-      onblur="if(this.value == '') { this.value = 0; }" />
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <label for="propTax">Property Tax</label>
+      <input type="number" formControlName="propTax"
+        name="propTax" [(ngModel)]="rentalInfo.expenses.propTax"
+        (blur)="update(['expenses', 'propTax'])"
+        class="form-control" />
+    </div>
+    <div class="col-sm-3">
+      <label for="insurance">Insurance</label>
+      <input type="number" formControlName="insurance"
+        name="insurance" [(ngModel)]="rentalInfo.expenses.insurance"
+        (blur)="update(['expenses', 'insurance'])"
+        class="form-control" />
+    </div>
   </div>
 
   <h4>Growth</h4>
-  <div class="form-group">
-    <label for="revenue">Revenue (%)</label>
-    <input type="number" formControlName="revenue"
-      name="revenue" [(ngModel)]="rentalInfo.growth.revenue"
-      onfocus="if(this.value == 0) { this.value = ''; }"
-      onblur="if(this.value == '') { this.value = 0; }" />
-  </div>
-  <div class="form-group">
-    <label for="expenses">Expenses (%)</label>
-    <input type="number" formControlName="expenses"
-      name="expenses" [(ngModel)]="rentalInfo.growth.expenses"
-      onfocus="if(this.value == 0) { this.value = ''; }"
-      onblur="if(this.value == '') { this.value = 0; }" />
-  </div>
-  <div class="form-group">
-    <label for="appreciation">Appreciation (%)</label>
-    <input type="number" formControlName="appreciation"
-      name="appreciation" [(ngModel)]="rentalInfo.growth.appreciation"
-      onfocus="if(this.value == 0) { this.value = ''; }"
-      onblur="if(this.value == '') { this.value = 0; }" />
+  <div class="form-group row">
+    <div class="col-sm-2">
+      <label for="revenue">Revenue (%)</label>
+      <input type="number" formControlName="revenue"
+        name="revenue" [(ngModel)]="rentalInfo.growth.revenue"
+        (blur)="update(['growth', 'revenue'])"
+        class="form-control" />
+    </div>
+    <div class="col-sm-2">
+      <label for="expenses">Expenses (%)</label>
+      <input type="number" formControlName="expenses"
+        name="expenses" [(ngModel)]="rentalInfo.growth.expenses"
+        (blur)="update(['growth', 'expenses'])"
+        class="form-control" />
+    </div>
+    <div class="col-sm-2">
+      <label for="appreciation">Appreciation (%)</label>
+      <input type="number" formControlName="appreciation"
+        name="appreciation" [(ngModel)]="rentalInfo.growth.appreciation"
+        (blur)="update(['growth', 'appreciation'])"
+        class="form-control" />
+    </div>
   </div>
 </form>
