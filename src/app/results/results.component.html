@@ -1,136 +1,135 @@
-<h3>Results</h3>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-sm-2 result-header">
     <span>Purchase Price</span>
   </div>
-  <div class="col-md-4">
+  <div class="col-sm-2 result-header">
     <span>Total Cost</span>
   </div>
-  <div class="col-md-4">
+  <div class="col-sm-2 result-header">
     <span>Cash Outlay</span>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-sm-2">
     <span>{{results.purchasePrice | tostring:0:true}}</span>
   </div>
-  <div class="col-md-4">
+  <div class="col-sm-2">
     <span>{{results.totalCost | tostring:0:true}}</span>
   </div>
-  <div class="col-md-4">
+  <div class="col-sm-2">
     <span>{{results.cashOutlay | tostring:0:true}}</span>
   </div>
 </div>
-<h4>Income</h4>
+<h5>Income</h5>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-sm-2 result-header">
     <span>Gross Revenue Monthly</span>
   </div>
-  <div class="col-md-6">
+  <div class="col-sm-2 result-header">
     <span>Gross Revenue Annual</span>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-sm-2">
     <span>{{results.gross.revenueMonth | tostring:0:true}}</span>
   </div>
-  <div class="col-md-6">
+  <div class="col-sm-2">
     <span>{{results.gross.revenueYear | tostring:0:true}}</span>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-sm-2 result-header">
     <span>Gross Income Monthly</span>
   </div>
-  <div class="col-md-6">
+  <div class="col-sm-2 result-header">
     <span>Gross Income Annual</span>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-sm-2">
     <span>{{results.gross.incomeMonth | tostring:0:true}}</span>
   </div>
-  <div class="col-md-6">
+  <div class="col-sm-2">
     <span>{{results.gross.incomeYear | tostring:0:true}}</span>
   </div>
 </div>
 
-<h4>Expenses</h4>
+<h5>Expenses</h5>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-sm-2 result-header">
     <span>Total Monthly</span>
   </div>
-  <div class="col-md-6">
+  <div class="col-sm-2 result-header">
     <span>Total Annual</span>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-sm-2">
     <span>{{results.expenses.month | tostring:0:true}}</span>
   </div>
-  <div class="col-md-6">
+  <div class="col-sm-2">
     <span>{{results.expenses.year | tostring:0:true}}</span>
   </div>
 </div>
 
-<h4>Key Factors</h4>
+<h5>Key Factors</h5>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-sm-2 result-header">
     <span>NOI</span>
   </div>
-  <div class="col-md-4">
+  <div class="col-sm-2 result-header">
     <span>Cash Flow Monthly</span>
   </div>
-  <div class="col-md-4">
+  <div class="col-sm-2 result-header">
     <span>Cash Flow Annual</span>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-sm-2">
     <span>{{results.keyFactors.noi | tostring:0:true}}</span>
   </div>
-  <div class="col-md-4">
+  <div class="col-sm-2">
     <span>{{results.keyFactors.cashFlowMonth | tostring:0:true}}</span>
   </div>
-  <div class="col-md-4">
+  <div class="col-sm-2">
     <span>{{results.keyFactors.cashFlowYear | tostring:0:true}}</span>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-sm-2 result-header">
     <span>Cash ROI</span>
   </div>
-  <div class="col-md-4">
+  <div class="col-sm-2 result-header">
     <span>Total ROI</span>
   </div>
-  <div class="col-md-4">
+  <div class="col-sm-2 result-header">
     <span>Cap Rate</span>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-sm-2">
     <span>{{results.keyFactors.cashROI | tostring:2:false}}</span>
   </div>
-  <div class="col-md-4">
+  <div class="col-sm-2">
     <span>{{results.keyFactors.totalROI | tostring:2:false}}</span>
   </div>
-  <div class="col-md-4">
+  <div class="col-sm-2">
     <span>{{results.keyFactors.capRate | tostring:2:false}}</span>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-sm-2 result-header">
     <span>GRM</span>
   </div>
-  <div class="col-md-6">
+  <div class="col-sm-2 result-header">
     <span>DSCR</span>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-sm-2">
     <span>{{results.keyFactors.grm | tostring:2:false}}</span>
   </div>
-  <div class="col-md-6">
+  <div class="col-sm-2">
     <span>{{results.keyFactors.dscr | tostring:2:false}}</span>
   </div>
 </div>

@@ -1,12 +1,14 @@
-<h3>Purchase Info</h3>
 <form [formGroup]="purchaseInfoForm" novalidate>
-  <div class="form-group row">
+  <div class="form-group row form-group-sm">
     <div class="col-sm-3">
       <label for="purchasePrice">Purchase Price</label>
-      <input type="number" formControlName="purchasePrice"
-        name="purchasePrice" [(ngModel)]="purchaseInfo.purchasePrice"
-        (blur)="update(['purchasePrice'])"
-        class="form-control" />
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="number" formControlName="purchasePrice"
+          name="purchasePrice" [(ngModel)]="purchaseInfo.purchasePrice"
+          (blur)="update(['purchasePrice'])"
+          class="form-control" />
+      </div>
     </div>
     <div class="col-sm-3">
       <label for="closingCosts">Closing Costs</label>
@@ -23,13 +25,13 @@
         class="form-control" />
     </div>
   </div>
-  <div class="form-group row">
+  <div class="form-group row form-group-sm">
     <div class="col-sm-3">
       <label for="totalCost">Total Cost</label>
       <span name="totalCost">{{summaryInfo.totalCost}}</span>
     </div>
   </div>
-  <div class="form-group row">
+  <div class="form-group row form-group-sm">
     <div class="col-sm-3">
       <label for="arv">ARV</label>
       <input type="number" formControlName="arv"
@@ -39,8 +41,8 @@
     </div>
   </div>
 
-  <h4>Loan Info</h4>
-  <div class="form-group row">
+  <h5>Loan Info</h5>
+  <div class="form-group row form-group-sm">
     <div class="col-sm-3">
       <label for="downPmtPct">Downpayment (%)</label>
       <input type="number" formControlName="downPmtPct"
@@ -63,7 +65,7 @@
         class="form-control" />
     </div>
   </div>
-  <div class="form-group row">
+  <div class="form-group row form-group-sm">
     <div class="col-sm-3">
       <label for="downPayment">Downpayment Amount</label>
       <span name="downPayment">{{summaryInfo.downPmtAmt}}</span>

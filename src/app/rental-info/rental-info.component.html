@@ -1,7 +1,6 @@
-<h3>Rental Info</h3>
 <form [formGroup]="rentalInfoForm" novalidate>
-  <h4>Rental Income</h4>
-  <div class="form-group row">
+  <h5>Rental Income</h5>
+  <div class="form-group row form-group-sm">
     <div class="col-sm-3">
       <label for="numUnits">Number of Units</label>
       <select name="numUnits" formControlName="numUnits"
@@ -13,7 +12,7 @@
       </select>
     </div>
   </div>
-  <div class="form-group row">
+  <div class="form-group row form-group-sm">
     <div *ngFor="let unit of unitNames; let idx = index" class="col-sm-2">
       <label [for]="unitNames[idx]" *ngIf="idx < rentalInfo.numUnits">
         Unit {{idx+1}}
@@ -23,14 +22,14 @@
         class="form-control"/>
     </div>
   </div>
-  <div class="form-group row">
+  <div class="form-group row form-group-sm">
     <div class="col-sm-3">
       <label for="totalRent">Total Rent</label>
       <span name="totalRent">{{summaryInfo.totalRent}}</span>
     </div>
   </div>
 
-  <div class="form-group row">
+  <div class="form-group row form-group-sm">
     <div class="col-sm-2">
       <label for="otherIncome">Other Income</label>
       <input type="number" formControlName="otherIncome"
@@ -39,7 +38,7 @@
         class="form-control" />
     </div>
   </div>
-  <div class="form-group row">
+  <div class="form-group row form-group-sm">
     <div class="col-sm-2">
       <label for="vacancyRate">Vacancy Rate (%)</label>
       <input type="number" formControlName="vacancyRate"
@@ -49,8 +48,8 @@
     </div>
   </div>
 
-  <h4>Owner Expenses (Annual)</h4>
-  <div class="form-group row">
+  <h5>Owner Expenses (Annual)</h5>
+  <div class="form-group row form-group-sm">
     <div class="col-sm-2">
       <label for="electric">Electric</label>
       <input type="number" formControlName="electric"
@@ -94,13 +93,13 @@
         class="form-control" />
     </div>
   </div>
-  <div class="form-group row">
+  <div class="form-group row form-group-sm">
     <div class="col-sm-3">
       <label for="totalUtilities">Total Utilities</label>
       <span name="totalUtilities">{{summaryInfo.totalUtilities}}</span>
     </div>
   </div>
-  <div class="form-group row">
+  <div class="form-group row form-group-sm">
     <div class="col-sm-3">
       <label for="repairs">Repairs / Capex (%)</label>
       <input type="number" formControlName="repairs"
@@ -116,7 +115,7 @@
         class="form-control" />
     </div>
   </div>
-  <div class="form-group row">
+  <div class="form-group row form-group-sm">
     <div class="col-sm-3">
       <label for="propTax">Property Tax</label>
       <input type="number" formControlName="propTax"
@@ -133,8 +132,8 @@
     </div>
   </div>
 
-  <h4>Growth</h4>
-  <div class="form-group row">
+  <h5>Growth</h5>
+  <div class="form-group row form-group-sm">
     <div class="col-sm-2">
       <label for="revenue">Revenue (%)</label>
       <input type="number" formControlName="revenue"
