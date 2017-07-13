@@ -12,71 +12,87 @@
     </div>
     <div class="col-sm-3">
       <label for="closingCosts">Closing Costs</label>
-      <input type="number" formControlName="closingCosts"
-        name="closingCosts" [(ngModel)]="purchaseInfo.closingCosts"
-        (blur)="update(['closingCosts'])"
-        class="form-control" />
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="number" formControlName="closingCosts"
+          name="closingCosts" [(ngModel)]="purchaseInfo.closingCosts"
+          (blur)="update(['closingCosts'])"
+          class="form-control" />
+      </div>
     </div>
     <div class="col-sm-3">
       <label for="repairCosts">Repair Costs</label>
-      <input type="number" formControlName="repairCosts"
-        name="repairCosts" [(ngModel)]="purchaseInfo.repairCosts"
-        (blur)="update(['repairCosts'])"
-        class="form-control" />
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="number" formControlName="repairCosts"
+          name="repairCosts" [(ngModel)]="purchaseInfo.repairCosts"
+          (blur)="update(['repairCosts'])"
+          class="form-control" />
+      </div>
     </div>
-  </div>
-  <div class="form-group row form-group-sm">
-    <div class="col-sm-3">
-      <label for="totalCost">Total Cost</label>
-      <span name="totalCost">{{summaryInfo.totalCost}}</span>
-    </div>
-  </div>
-  <div class="form-group row form-group-sm">
     <div class="col-sm-3">
       <label for="arv">ARV</label>
-      <input type="number" formControlName="arv"
-        name="arv" [(ngModel)]="purchaseInfo.arv"
-        (blur)="update(['arv'])"
-        class="form-control" />
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="number" formControlName="arv"
+          name="arv" [(ngModel)]="purchaseInfo.arv"
+          (blur)="update(['arv'])"
+          class="form-control" />
+      </div>
+    </div>
+  </div>
+  <div class="form-group row form-group-sm">
+    <div class="col-sm-3">
+      <div class="summary-header">Total Cost</div>
+      <div>{{summaryInfo.totalCost || '$ 0'}}</div>
     </div>
   </div>
 
-  <h5>Loan Info</h5>
+  <hr/>
   <div class="form-group row form-group-sm">
     <div class="col-sm-3">
-      <label for="downPmtPct">Downpayment (%)</label>
-      <input type="number" formControlName="downPmtPct"
-        name="downPmtPct" [(ngModel)]="purchaseInfo.loanInfo.downPmtPct"
-        (blur)="update(['loanInfo', 'downPmtPct'])"
-        class="form-control" />
+      <label for="downPmtPct">Downpayment</label>
+      <div class="input-group">
+        <input type="number" formControlName="downPmtPct"
+          name="downPmtPct" [(ngModel)]="purchaseInfo.loanInfo.downPmtPct"
+          (blur)="update(['loanInfo', 'downPmtPct'])"
+          class="form-control" />
+        <span class="input-group-addon">%</span>
+      </div>
     </div>
     <div class="col-sm-3">
-      <label for="interestRate">Interest Rate (%)</label>
-      <input type="number" formControlName="interestRate"
-        name="interestRate" [(ngModel)]="purchaseInfo.loanInfo.interestRate"
-        (blur)="update(['loanInfo', 'interestRate'])"
-        class="form-control" />
+      <label for="interestRate">Interest Rate</label>
+      <div class="input-group">
+        <input type="number" formControlName="interestRate"
+          name="interestRate" [(ngModel)]="purchaseInfo.loanInfo.interestRate"
+          (blur)="update(['loanInfo', 'interestRate'])"
+          class="form-control" />
+        <span class="input-group-addon">%</span>
+      </div>
     </div>
     <div class="col-sm-3">
-      <label for="loanTerm">Loan Term (yrs)</label>
-      <input type="number" formControlName="loanTerm"
-        name="loanTerm" [(ngModel)]="purchaseInfo.loanInfo.loanTerm"
-        (blur)="update(['loanInfo', 'loanTerm'])"
-        class="form-control" />
+      <label for="loanTerm">Loan Term</label>
+      <div class="input-group">
+        <input type="number" formControlName="loanTerm"
+          name="loanTerm" [(ngModel)]="purchaseInfo.loanInfo.loanTerm"
+          (blur)="update(['loanInfo', 'loanTerm'])"
+          class="form-control" />
+        <span class="input-group-addon">yrs</span>
+      </div>
     </div>
   </div>
   <div class="form-group row form-group-sm">
     <div class="col-sm-3">
-      <label for="downPayment">Downpayment Amount</label>
-      <span name="downPayment">{{summaryInfo.downPmtAmt}}</span>
+      <div class="summary-header">Downpayment Amount</div>
+      <div class="summary-info">{{summaryInfo.downPmtAmt || '$ 0'}}</div>
     </div>
     <div class="col-sm-3">
-      <label for="loanAmount">Loan Amount</label>
-      <span name="loanAmount">{{summaryInfo.loanAmt}}</span>
+      <div class="summary-header">Loan Amount</div>
+      <div class="summary-info">{{summaryInfo.loanAmt || '$ 0'}}</div>
     </div>
     <div class="col-sm-3">
-      <label for="loanPayment">Loan Payment</label>
-      <span name="loanPayment">{{summaryInfo.loanPmtAmt}}</span>
+      <div class="summary-header">Loan Payment</div>
+      <div class="summary-info">{{summaryInfo.loanPmtAmt || '$ 0'}}</div>
     </div>
   </div>
 </form>
