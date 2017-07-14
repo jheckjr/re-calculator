@@ -1,0 +1,16 @@
+table {
+  padding: 5px;
+}
+
+tr.sub-heading {
+
+}
+tr.heading > td {
+  padding: 10px 20px 0 0;
+}
+
+tr.data > td {
+  font-size: 1.2em;
+  font-weight: 500;
+  padding: 2px 10px 2px 1px;
+}
