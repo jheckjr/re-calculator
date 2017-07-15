@@ -12,6 +12,7 @@ export class CalculateResultsService {
       purchasePrice: 0,
       totalCost: 0,
       cashOutlay: 0,
+      mortgage: 0,
       arv: 0,
       gross: {
         revenueMonth: 0,
@@ -78,6 +79,7 @@ export class CalculateResultsService {
     let loanPmt = this.loanPayment(loanAmt, purchaseInfo.loanInfo.interestRate,
       purchaseInfo.loanInfo.loanTerm);
     let cashFlow = this.cashFlow(this.results.keyFactors.noi, loanPmt);
+    this.results.mortgage = loanPmt;
     this.results.keyFactors.cashFlowYear = cashFlow;
     this.results.keyFactors.cashFlowMonth = cashFlow / this.MONTHS_IN_YEAR;
 

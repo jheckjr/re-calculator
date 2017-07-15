@@ -2,6 +2,7 @@ export interface Results {
   purchasePrice: number;
   totalCost: number;
   cashOutlay: number;
+  mortgage: number;
   arv: number;
   gross: {
     revenueMonth: number,
