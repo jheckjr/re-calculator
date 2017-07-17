@@ -1,27 +1,27 @@
 <form [formGroup]="propertyInfoForm" novalidate>
-  <div class="form-group row form-group-sm">
+  <div class="form-group row form-group-sm" [class.has-error]="!propertyInfoForm.controls['reportName'].valid && propertyInfoForm.controls['reportName'].touched">
     <div class="col-sm-4">
-      <label for="name">Report Name</label>
+      <label class="control-label" for="name">Report Name</label>
       <input type="text" formControlName="reportName"
         name="name" [(ngModel)]="propertyInfo.reportName" 
-        class="form-control" />
+        class="form-control required-bar" [class.required-error-bar]="!propertyInfoForm.controls['reportName'].valid && propertyInfoForm.controls['reportName'].touched"/>
     </div>
   </div>
-  <div class="form-group row form-group-sm">
-    <div class="col-sm-4">
-      <label for="street">Street</label>
+  <div class="row">
+    <div class="form-group form-group-sm col-sm-4" [class.has-error]="!propertyInfoForm.controls['street'].valid && propertyInfoForm.controls['street'].touched">
+      <label class="control-label" for="street">Street</label>
       <input type="text" formControlName="street"
         name="street" [(ngModel)]="propertyInfo.address.street"
         class="form-control"/>
     </div>
-    <div class="col-sm-3">
-      <label for="city">City</label>
+    <div class="form-group form-group-sm col-sm-3" [class.has-error]="!propertyInfoForm.controls['city'].valid && propertyInfoForm.controls['city'].touched">
+      <label class="control-label" for="city">City</label>
       <input type="text" formControlName="city"
         name="city" [(ngModel)]="propertyInfo.address.city"
         class="form-control" />
     </div>
-    <div class="col-sm-2">
-      <label for="state">State</label>
+    <div class="form-group form-group-sm col-sm-2">
+      <label class="control-label" for="state">State</label>
       <select formControlName="state" name="state"
         [(ngModel)]="propertyInfo.address.state" 
         class="form-control" >
@@ -30,32 +30,32 @@
         </option>
       </select>
     </div>
-    <div class="col-sm-2">
-      <label for="zip">Zip</label>
+    <div class="form-group form-group-sm col-sm-2" [class.has-error]="!propertyInfoForm.controls['zip'].valid && propertyInfoForm.controls['zip'].touched">
+      <label class="control-label" for="zip">Zip</label>
       <input type="text" formControlName="zip"
         name="zip" [(ngModel)]="propertyInfo.address.zip"
         class="form-control" />
     </div>
   </div>
-  <div class="form-group row form-group-sm">
+  <div class="form-group row form-group-sm" [class.has-error]="!propertyInfoForm.controls['description'].valid && propertyInfoForm.controls['description'].touched">
     <div class="col-sm-6">
-      <label for="description">Sales Description</label>
+      <label class="control-label" for="description">Sales Description</label>
       <textarea formControlName="description"
         name="description" [(ngModel)]="propertyInfo.salesDescription"
         class="form-control"></textarea>
     </div>
   </div>
-  <div class="form-group row form-group-sm">
+  <div class="form-group row form-group-sm" [class.has-error]="!propertyInfoForm.controls['mls'].valid && propertyInfoForm.controls['mls'].touched">
     <div class="col-sm-3">
-      <label for="mls">MLS #</label>
+      <label class="control-label" for="mls">MLS #</label>
       <input type="number" formControlName="mls"
         name="mls" [(ngModel)]="propertyInfo.mlsNumber"
         class="form-control" />
     </div>
   </div>
-  <div class="form-group row form-group-sm">
+  <div class="form-group row form-group-sm" [class.has-error]="!propertyInfoForm.controls['notes'].valid && propertyInfoForm.controls['notes'].touched">
     <div class="col-sm-6">
-      <label for="notes">Notes</label>
+      <label class="control-label" for="notes">Notes</label>
       <textarea formControlName="notes"
         name="notes" [(ngModel)]="propertyInfo.userNotes"
         class="form-control"></textarea>
@@ -63,7 +63,7 @@
   </div>
   <div class="form-group row form-group-sm">
     <div class="col-sm-4">
-      <label for="imageName">Picture</label>
+      <label class="control-label" for="imageName">Picture</label>
       <input type="file" formControlName="imageName" accept="image/*"
         name="imageName" [(ngModel)]="propertyInfo.imageName"
         class="form-control btn" />

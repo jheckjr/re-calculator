@@ -25,7 +25,7 @@ export class PropertyInfoComponent implements OnChanges {
       'description': [undefined, Validators.maxLength(3000)],
       'mls': [undefined, Validators.maxLength(32)],
       'notes': [undefined, Validators.maxLength(3000)],
-      'imageName': [undefined, Validators.maxLength(255)]
+      'imageName': undefined
     });
     // Subscribe to form changes to determine validity
     this.propertyInfoForm.statusChanges.subscribe(() => {
