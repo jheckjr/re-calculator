@@ -1,10 +1,10 @@
 <form [formGroup]="rentalInfoForm" novalidate>
   <div class="form-group row form-group-sm">
-    <div class="col-sm-3">
+    <div class="col-sm-3" [class.has-error]="hasError('numUnits')">
       <label for="numUnits">Number of Units</label>
       <select name="numUnits" formControlName="numUnits"
         [(ngModel)]="rentalInfo.numUnits" [value]="unitOptions[0]"
-        class="form-control">
+        class="form-control required-bar" [class.required-error-bar]="hasError('numUnits')">
         <option *ngFor="let units of unitOptions" [value]="units">
           {{units}}
         </option>
@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="form-group row form-group-sm">
-    <div *ngFor="let unit of unitNames; let idx = index" class="col-sm-2">
+    <div *ngFor="let unit of unitNames; let idx = index" class="col-sm-2" [class.has-error]="hasError(unitNames[idx])">
       <label [for]="unitNames[idx]" *ngIf="idx < rentalInfo.numUnits">
         Unit {{idx+1}}
       </label>
@@ -20,7 +20,7 @@
         <span class="input-group-addon">$</span>
         <input type="number" [name]="unitNames[idx]"
           [formControlName]="unitNames[idx]" [(ngModel)]="rentalInfo.rents[idx]"
-          (blur)="update([])" class="form-control"/>
+          (blur)="update([])" class="form-control required-bar" [class.required-error-bar]="hasError(unitNames[idx])" />
       </div>
     </div>
   </div>
@@ -32,23 +32,23 @@
   </div>
 
   <div class="form-group row form-group-sm">
-    <div class="col-sm-2">
+    <div class="col-sm-2" [class.has-error]="hasError('otherIncome')">
       <label for="otherIncome">Other Income</label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="otherIncome"
           name="otherIncome" [(ngModel)]="rentalInfo.otherIncome" 
           (blur)="update(['otherIncome'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('otherIncome')" />
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-2" [class.has-error]="hasError('vacancyRate')">
       <label for="vacancyRate">Vacancy Rate</label>
       <div class="input-group">
         <input type="number" formControlName="vacancyRate"
           name="vacancyRate" [(ngModel)]="rentalInfo.vacancyRate"
           (blur)="update(['vacancyRate'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('vacancyRate')" />
         <span class="input-group-addon">%</span>
       </div>
     </div>
@@ -56,64 +56,64 @@
 
   <hr/>
   <div class="form-group row form-group-sm">
-    <div class="col-sm-2">
+    <div class="col-sm-2" [class.has-error]="hasError('electric')">
       <label for="electric">Electric</label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="electric"
           name="electric" [(ngModel)]="rentalInfo.expenses.electric"
           (blur)="update(['expenses', 'electric'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('electric')" />
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-2" [class.has-error]="hasError('gas')">
       <label for="gas">Gas</label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="gas"
           name="gas" [(ngModel)]="rentalInfo.expenses.gas"
           (blur)="update(['expenses', 'gas'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('gas')" />
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-2" [class.has-error]="hasError('water')">
       <label for="water">Water</label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="water"
           name="water" [(ngModel)]="rentalInfo.expenses.water"
           (blur)="update(['expenses', 'water'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('water')" />
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-2" [class.has-error]="hasError('sewer')">
       <label for="sewer">Sewer</label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="sewer"
           name="sewer" [(ngModel)]="rentalInfo.expenses.sewer"
           (blur)="update(['expenses', 'sewer'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('sewer')" />
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-2" [class.has-error]="hasError('trash')">
       <label for="trash">Trash</label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="trash"
           name="trash" [(ngModel)]="rentalInfo.expenses.trash"
           (blur)="update(['expenses', 'trash'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('trash')" />
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-2" [class.has-error]="hasError('other')">
       <label for="other">Other</label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="other"
           name="other" [(ngModel)]="rentalInfo.expenses.other"
           (blur)="update(['expenses', 'other'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('other')" />
       </div>
     </div>
   </div>
@@ -124,77 +124,77 @@
     </div>
   </div>
   <div class="form-group row form-group-sm">
-    <div class="col-sm-3">
+    <div class="col-sm-3" [class.has-error]="hasError('repairs')">
       <label for="repairs">Repairs / Capex</label>
       <div class="input-group">
         <input type="number" formControlName="repairs"
           name="repairs" [(ngModel)]="rentalInfo.expenses.repairs"
           (blur)="update(['expenses', 'repairs'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('repairs')" />
         <span class="input-group-addon">%</span>
       </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-3" [class.has-error]="hasError('propMgmt')">
       <label for="propMgmt">Property Management</label>
       <div class="input-group">
         <input type="number" formControlName="propMgmt"
           name="propMgmt" [(ngModel)]="rentalInfo.expenses.propMgmt"
           (blur)="update(['expenses', 'propMgmt'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('propMgmt')" />
         <span class="input-group-addon">%</span>
       </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-3" [class.has-error]="hasError('propTax')">
       <label for="propTax">Property Tax</label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="propTax"
           name="propTax" [(ngModel)]="rentalInfo.expenses.propTax"
           (blur)="update(['expenses', 'propTax'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('propTax')" />
       </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-3" [class.has-error]="hasError('insurance')">
       <label for="insurance">Insurance</label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="insurance"
           name="insurance" [(ngModel)]="rentalInfo.expenses.insurance"
           (blur)="update(['expenses', 'insurance'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('insurance')" />
       </div>
     </div>
   </div>
 
   <hr/>
   <div class="form-group row form-group-sm">
-    <div class="col-sm-2">
+    <div class="col-sm-2" [class.has-error]="hasError('revenue')">
       <label for="revenue">Revenue</label>
       <div class="input-group">
         <input type="number" formControlName="revenue"
           name="revenue" [(ngModel)]="rentalInfo.growth.revenue"
           (blur)="update(['growth', 'revenue'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('revenue')" />
         <span class="input-group-addon">%</span>
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-2" [class.has-error]="hasError('expenses')">
       <label for="expenses">Expenses</label>
       <div class="input-group">
         <input type="number" formControlName="expenses"
           name="expenses" [(ngModel)]="rentalInfo.growth.expenses"
           (blur)="update(['growth', 'expenses'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('expenses')" />
         <span class="input-group-addon">%</span>
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-2" [class.has-error]="hasError('appreciation')">
       <label for="appreciation">Appreciation</label>
       <div class="input-group">
         <input type="number" formControlName="appreciation"
           name="appreciation" [(ngModel)]="rentalInfo.growth.appreciation"
           (blur)="update(['growth', 'appreciation'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('appreciation')" />
         <span class="input-group-addon">%</span>
       </div>
     </div>

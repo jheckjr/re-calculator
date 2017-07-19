@@ -54,4 +54,9 @@ export class PropertyInfoComponent implements OnChanges {
       };
     }
   }
+  
+  private hasError(controlName: string) {
+    return this.propertyInfoForm.controls[controlName].invalid && 
+      this.propertyInfoForm.controls[controlName].touched;
+  }
 }

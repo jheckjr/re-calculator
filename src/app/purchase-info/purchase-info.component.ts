@@ -97,4 +97,9 @@ export class PurchaseInfoComponent {
     const strPayment = payment.toFixed(0);
     this.summaryInfo.loanPmtAmt = '$' + Number(strPayment).toLocaleString();
   }
+  
+  private hasError(controlName: string) {
+    return this.purchaseInfoForm.controls[controlName].invalid && 
+      this.purchaseInfoForm.controls[controlName].touched;
+  }
 }

@@ -1,43 +1,43 @@
 <form [formGroup]="purchaseInfoForm" novalidate>
-  <div class="form-group row form-group-sm has-error">
-    <div class="col-sm-3">
+  <div class="form-group row form-group-sm">
+    <div class="col-sm-3" [class.has-error]="hasError('purchasePrice')">
       <label class="control-label" for="purchasePrice">Purchase Price</label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="purchasePrice"
           name="purchasePrice" [(ngModel)]="purchaseInfo.purchasePrice"
           (blur)="update(['purchasePrice'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('purchasePrice')" />
       </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-3" [class.has-error]="hasError('closingCosts')">
       <label for="closingCosts">Closing Costs</label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="closingCosts"
           name="closingCosts" [(ngModel)]="purchaseInfo.closingCosts"
           (blur)="update(['closingCosts'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('closingCosts')" />
       </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-3" [class.has-error]="hasError('repairCosts')">
       <label for="repairCosts">Repair Costs</label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="repairCosts"
           name="repairCosts" [(ngModel)]="purchaseInfo.repairCosts"
           (blur)="update(['repairCosts'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('repairCosts')" />
       </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-3" [class.has-error]="hasError('arv')">
       <label for="arv">ARV</label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="arv"
           name="arv" [(ngModel)]="purchaseInfo.arv"
           (blur)="update(['arv'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('arv')" />
       </div>
     </div>
   </div>
@@ -50,33 +50,33 @@
 
   <hr/>
   <div class="form-group row form-group-sm">
-    <div class="col-sm-3">
+    <div class="col-sm-3" [class.has-error]="hasError('downPmtPct')">
       <label for="downPmtPct">Downpayment</label>
       <div class="input-group">
         <input type="number" formControlName="downPmtPct"
           name="downPmtPct" [(ngModel)]="purchaseInfo.loanInfo.downPmtPct"
           (blur)="update(['loanInfo', 'downPmtPct'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('downPmtPct')" />
         <span class="input-group-addon">%</span>
       </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-3" [class.has-error]="hasError('interestRate')">
       <label for="interestRate">Interest Rate</label>
       <div class="input-group">
         <input type="number" formControlName="interestRate"
           name="interestRate" [(ngModel)]="purchaseInfo.loanInfo.interestRate"
           (blur)="update(['loanInfo', 'interestRate'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('interestRate')" />
         <span class="input-group-addon">%</span>
       </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-3" [class.has-error]="hasError('loanTerm')">
       <label for="loanTerm">Loan Term</label>
       <div class="input-group">
         <input type="number" formControlName="loanTerm"
           name="loanTerm" [(ngModel)]="purchaseInfo.loanInfo.loanTerm"
           (blur)="update(['loanInfo', 'loanTerm'])"
-          class="form-control" />
+          class="form-control required-bar" [class.required-error-bar]="hasError('loanTerm')" />
         <span class="input-group-addon">yrs</span>
       </div>
     </div>

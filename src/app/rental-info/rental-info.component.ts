@@ -97,4 +97,9 @@ export class RentalInfoComponent {
     const strUtilities = totalUtilities.toFixed(0);
     this.summaryInfo.totalUtilities = '$' + Number(strUtilities).toLocaleString();
   }
+  
+  private hasError(controlName: string) {
+    return this.rentalInfoForm.controls[controlName].invalid && 
+      this.rentalInfoForm.controls[controlName].touched;
+  }
 }

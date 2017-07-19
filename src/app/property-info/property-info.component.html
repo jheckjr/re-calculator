@@ -1,20 +1,20 @@
 <form [formGroup]="propertyInfoForm" novalidate>
-  <div class="form-group row form-group-sm" [class.has-error]="!propertyInfoForm.controls['reportName'].valid && propertyInfoForm.controls['reportName'].touched">
+  <div class="form-group row form-group-sm" [class.has-error]="hasError('reportName')">
     <div class="col-sm-4">
       <label class="control-label" for="name">Report Name</label>
       <input type="text" formControlName="reportName"
         name="name" [(ngModel)]="propertyInfo.reportName" 
-        class="form-control required-bar" [class.required-error-bar]="!propertyInfoForm.controls['reportName'].valid && propertyInfoForm.controls['reportName'].touched"/>
+        class="form-control required-bar" [class.required-error-bar]="hasError('reportName')"/>
     </div>
   </div>
   <div class="row">
-    <div class="form-group form-group-sm col-sm-4" [class.has-error]="!propertyInfoForm.controls['street'].valid && propertyInfoForm.controls['street'].touched">
+    <div class="form-group form-group-sm col-sm-4" [class.has-error]="hasError('street')">
       <label class="control-label" for="street">Street</label>
       <input type="text" formControlName="street"
         name="street" [(ngModel)]="propertyInfo.address.street"
         class="form-control"/>
     </div>
-    <div class="form-group form-group-sm col-sm-3" [class.has-error]="!propertyInfoForm.controls['city'].valid && propertyInfoForm.controls['city'].touched">
+    <div class="form-group form-group-sm col-sm-3" [class.has-error]="hasError('city')">
       <label class="control-label" for="city">City</label>
       <input type="text" formControlName="city"
         name="city" [(ngModel)]="propertyInfo.address.city"
@@ -30,14 +30,14 @@
         </option>
       </select>
     </div>
-    <div class="form-group form-group-sm col-sm-2" [class.has-error]="!propertyInfoForm.controls['zip'].valid && propertyInfoForm.controls['zip'].touched">
+    <div class="form-group form-group-sm col-sm-2" [class.has-error]="hasError('zip')">
       <label class="control-label" for="zip">Zip</label>
       <input type="text" formControlName="zip"
         name="zip" [(ngModel)]="propertyInfo.address.zip"
         class="form-control" />
     </div>
   </div>
-  <div class="form-group row form-group-sm" [class.has-error]="!propertyInfoForm.controls['description'].valid && propertyInfoForm.controls['description'].touched">
+  <div class="form-group row form-group-sm" [class.has-error]="hasError('description')">
     <div class="col-sm-6">
       <label class="control-label" for="description">Sales Description</label>
       <textarea formControlName="description"
@@ -45,7 +45,7 @@
         class="form-control"></textarea>
     </div>
   </div>
-  <div class="form-group row form-group-sm" [class.has-error]="!propertyInfoForm.controls['mls'].valid && propertyInfoForm.controls['mls'].touched">
+  <div class="form-group row form-group-sm" [class.has-error]="hasError('mls')">
     <div class="col-sm-3">
       <label class="control-label" for="mls">MLS #</label>
       <input type="number" formControlName="mls"
@@ -53,7 +53,7 @@
         class="form-control" />
     </div>
   </div>
-  <div class="form-group row form-group-sm" [class.has-error]="!propertyInfoForm.controls['notes'].valid && propertyInfoForm.controls['notes'].touched">
+  <div class="form-group row form-group-sm" [class.has-error]="hasError('notes')">
     <div class="col-sm-6">
       <label class="control-label" for="notes">Notes</label>
       <textarea formControlName="notes"
