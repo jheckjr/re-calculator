@@ -14,6 +14,8 @@ export class PurchaseInfoComponent {
   
   private summaryInfo: any;
   private purchaseInfoForm: FormGroup;
+  
+  private percentErrorMsg = 'Must be 0-100';
 
   constructor(private formBuilder: FormBuilder) {
     // Build form with validators

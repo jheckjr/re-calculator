@@ -18,6 +18,8 @@ export class RentalInfoComponent {
   private unitNames = ['unit1', 'unit2', 'unit3', 'unit4'];
   private summaryInfo: any;
   private rentalInfoForm: FormGroup;
+  
+  private percentErrorMsg = 'Must be 0-100';
 
   constructor(private formBuilder: FormBuilder) {
     // Build form with validators

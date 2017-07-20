@@ -59,6 +59,9 @@
           class="form-control required-bar" [class.required-error-bar]="hasError('downPmtPct')" />
         <span class="input-group-addon">%</span>
       </div>
+      <div [hidden]="!hasError('downPmtPct')" class="alert alert-danger">
+        {{ percentErrorMsg }}
+      </div>
     </div>
     <div class="col-sm-3" [class.has-error]="hasError('interestRate')">
       <label for="interestRate">Interest Rate</label>
@@ -68,6 +71,9 @@
           (blur)="update(['loanInfo', 'interestRate'])"
           class="form-control required-bar" [class.required-error-bar]="hasError('interestRate')" />
         <span class="input-group-addon">%</span>
+      </div>
+      <div [hidden]="!hasError('interestRate')" class="alert alert-danger">
+        {{ percentErrorMsg }}
       </div>
     </div>
     <div class="col-sm-3" [class.has-error]="hasError('loanTerm')">

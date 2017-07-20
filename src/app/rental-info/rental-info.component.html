@@ -51,6 +51,9 @@
           class="form-control required-bar" [class.required-error-bar]="hasError('vacancyRate')" />
         <span class="input-group-addon">%</span>
       </div>
+      <div [hidden]="!hasError('vacancyRate')" class="alert alert-danger">
+        {{ percentErrorMsg }}
+      </div>
     </div>
   </div>
 
@@ -133,6 +136,9 @@
           class="form-control required-bar" [class.required-error-bar]="hasError('repairs')" />
         <span class="input-group-addon">%</span>
       </div>
+      <div [hidden]="!hasError('repairs')" class="alert alert-danger">
+        {{ percentErrorMsg }}
+      </div>
     </div>
     <div class="col-sm-3" [class.has-error]="hasError('propMgmt')">
       <label for="propMgmt">Property Management</label>
@@ -142,6 +148,9 @@
           (blur)="update(['expenses', 'propMgmt'])"
           class="form-control required-bar" [class.required-error-bar]="hasError('propMgmt')" />
         <span class="input-group-addon">%</span>
+      </div>
+      <div [hidden]="!hasError('propMgmt')" class="alert alert-danger">
+        {{ percentErrorMsg }}
       </div>
     </div>
     <div class="col-sm-3" [class.has-error]="hasError('propTax')">
@@ -177,6 +186,9 @@
           class="form-control required-bar" [class.required-error-bar]="hasError('revenue')" />
         <span class="input-group-addon">%</span>
       </div>
+      <div [hidden]="!hasError('revenue')" class="alert alert-danger">
+        {{ percentErrorMsg }}
+      </div>
     </div>
     <div class="col-sm-2" [class.has-error]="hasError('expenses')">
       <label for="expenses">Expenses</label>
@@ -187,6 +199,9 @@
           class="form-control required-bar" [class.required-error-bar]="hasError('expenses')" />
         <span class="input-group-addon">%</span>
       </div>
+      <div [hidden]="!hasError('expenses')" class="alert alert-danger">
+        {{ percentErrorMsg }}
+      </div>
     </div>
     <div class="col-sm-2" [class.has-error]="hasError('appreciation')">
       <label for="appreciation">Appreciation</label>
@@ -196,6 +211,9 @@
           (blur)="update(['growth', 'appreciation'])"
           class="form-control required-bar" [class.required-error-bar]="hasError('appreciation')" />
         <span class="input-group-addon">%</span>
+      </div>
+      <div [hidden]="!hasError('appreciation')" class="alert alert-danger">
+        {{ percentErrorMsg }}
       </div>
     </div>
   </div>
