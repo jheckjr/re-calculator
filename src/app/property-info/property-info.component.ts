@@ -11,8 +11,8 @@ import { zipCodeValidator } from '../validators';
 export class PropertyInfoComponent implements OnChanges {
   @Input() propertyInfo: PropertyInfo;
   @Output() isValid = new EventEmitter();
-  private propertyInfoForm: FormGroup;
-  private states = State;
+  propertyInfoForm: FormGroup;
+  states = State;
 
   constructor(private formBuilder: FormBuilder) {
     // Build form with validators
@@ -55,7 +55,7 @@ export class PropertyInfoComponent implements OnChanges {
     }
   }
   
-  private hasError(controlName: string) {
+  hasError(controlName: string) {
     return this.propertyInfoForm.controls[controlName].invalid && 
       this.propertyInfoForm.controls[controlName].touched;
   }

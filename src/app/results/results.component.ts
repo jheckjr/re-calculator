@@ -9,11 +9,9 @@ import { Results } from '../models';
 export class ResultsComponent implements OnChanges, OnInit {
   @Input() results: Results;
   private MAX_YEARS = 31;
-  private selectedYear: number;
-  private propertyValue: number;
-  private years = new Array(this.MAX_YEARS);
-  private propertyValues = new Array(this.MAX_YEARS);
-  private equityValues = new Array(this.MAX_YEARS);
+  years = new Array(this.MAX_YEARS);
+  propertyValues = new Array(this.MAX_YEARS);
+  equityValues = new Array(this.MAX_YEARS);
   
   constructor() {
     this.createYears();

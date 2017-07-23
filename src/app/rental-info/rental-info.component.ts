@@ -14,12 +14,12 @@ import { numberValidator,
 export class RentalInfoComponent {
   @Input() rentalInfo: RentalInfo;
   @Output() isValid = new EventEmitter();
-  private unitOptions = [1, 2, 3, 4];
-  private unitNames = ['unit1', 'unit2', 'unit3', 'unit4'];
-  private summaryInfo: any;
-  private rentalInfoForm: FormGroup;
+  unitOptions = [1, 2, 3, 4];
+  unitNames = ['unit1', 'unit2', 'unit3', 'unit4'];
+  summaryInfo: any;
+  rentalInfoForm: FormGroup;
   
-  private percentErrorMsg = 'Must be 0-100';
+  percentErrorMsg = 'Must be 0-100';
 
   constructor(private formBuilder: FormBuilder) {
     // Build form with validators
@@ -64,12 +64,12 @@ export class RentalInfoComponent {
     };
   }
 
-  private update() {
+  update() {
     this.updateTotalRent();
     this.updateTotalUtilities();
   }
   
-  private updateTotalRent() {
+  updateTotalRent() {
   	const unitRents = this.rentalInfo.rents.slice(0, this.rentalInfo.numUnits);
   	const rent = unitRents.reduce((total, unitRent) => 
   	  total + (unitRent || 0), 0);
@@ -77,7 +77,7 @@ export class RentalInfoComponent {
   	this.summaryInfo.totalRent = '$' + Number(strRent).toLocaleString();
   }
   
-  private updateTotalUtilities() {
+  updateTotalUtilities() {
     const totalUtilities = (this.rentalInfo.expenses.electric || 0) +
       (this.rentalInfo.expenses.gas || 0) +
       (this.rentalInfo.expenses.water || 0) +
@@ -88,7 +88,7 @@ export class RentalInfoComponent {
     this.summaryInfo.totalUtilities = '$' + Number(strUtilities).toLocaleString();
   }
   
-  private hasError(controlName: string) {
+  hasError(controlName: string) {
     return this.rentalInfoForm.controls[controlName].invalid && 
       this.rentalInfoForm.controls[controlName].touched;
   }

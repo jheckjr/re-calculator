@@ -13,15 +13,15 @@ import { CalculateResultsService, InitDataService } from './services';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private propertyInfoValid: boolean = false;
-  private purchaseInfoValid: boolean = false;
-  private rentalInfoValid: boolean = false;
+  propertyInfoValid: boolean = false;
+  purchaseInfoValid: boolean = false;
+  rentalInfoValid: boolean = false;
 
-  private resultsAreVisible: boolean = false;
+  resultsAreVisible: boolean = false;
 
-  private state = null;
-  private results = null;
-  private title = 'Rental Investment Calculator';
+  state = null;
+  results = null;
+  title = 'Rental Investment Calculator';
 
   constructor(@Inject(AppStore) private store,
     private resultsService: CalculateResultsService,
@@ -34,17 +34,17 @@ export class AppComponent {
     this.updateState();
   }
 
-  private storeDispatch(newState: any) {
+  storeDispatch(newState: any) {
     this.store.dispatch(updatePropertyInfo(newState.propertyInfo));
     this.store.dispatch(updatePurchaseInfo(newState.purchaseInfo));
     this.store.dispatch(updateRentalInfo(newState.rentalInfo));
   }
 
-  private updateState() {
+  updateState() {
     this.state = this.store.getState();
   }
 
-  private formIsValid(): boolean {
+  formIsValid(): boolean {
     const isValid = this.propertyInfoValid && this.purchaseInfoValid &&
       this.rentalInfoValid;
     if (isValid) {
@@ -54,7 +54,7 @@ export class AppComponent {
     return isValid;
   }
 
-  private updateResults() {
+  updateResults() {
     // Save state
     this.storeDispatch(this.state);
 

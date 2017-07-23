@@ -12,10 +12,10 @@ export class PurchaseInfoComponent {
   @Input() purchaseInfo: PurchaseInfo;
   @Output() isValid = new EventEmitter();
   
-  private summaryInfo: any;
-  private purchaseInfoForm: FormGroup;
+  summaryInfo: any;
+  purchaseInfoForm: FormGroup;
   
-  private percentErrorMsg = 'Must be 0-100';
+  percentErrorMsg = 'Must be 0-100';
 
   constructor(private formBuilder: FormBuilder) {
     // Build form with validators
@@ -45,14 +45,14 @@ export class PurchaseInfoComponent {
     };
   }
   
-  private update() {
+  update() {
     this.updateTotalCost();
     this.updateLoanAmt();
     this.updateLoanPmtAmt();
   }
   
   // Total cost of cash purchase
-  private updateTotalCost() {
+  updateTotalCost() {
   	const cost = (this.purchaseInfo.purchasePrice || 0) + 
   	  (this.purchaseInfo.closingCosts || 0) + (this.purchaseInfo.repairCosts || 0);
   	const strCost = cost.toFixed(0);
@@ -60,7 +60,7 @@ export class PurchaseInfoComponent {
   }
   
   // Downpayment and total loan amounts
-  private updateLoanAmt() {
+  updateLoanAmt() {
   	const downPmt = (this.purchaseInfo.purchasePrice * this.purchaseInfo.loanInfo.downPmtPct / 100) || 0;
   	const strDownPmt = downPmt.toFixed(0);
   	this.summaryInfo.downPmtAmt = '$' + Number(strDownPmt).toLocaleString();
@@ -71,7 +71,7 @@ export class PurchaseInfoComponent {
   }
   
   // Monthly loan payment
-  private updateLoanPmtAmt() {
+  updateLoanPmtAmt() {
     const rate = ((this.purchaseInfo.loanInfo.interestRate || 0) / 100) / 12;	// monthly rate
     const term = (this.purchaseInfo.loanInfo.loanTerm || 0) * 12;	// term in months
     const loanAmt = (this.purchaseInfo.purchasePrice * 
@@ -88,7 +88,7 @@ export class PurchaseInfoComponent {
     this.summaryInfo.loanPmtAmt = '$' + Number(strPayment).toLocaleString();
   }
   
-  private hasError(controlName: string) {
+  hasError(controlName: string) {
     return this.purchaseInfoForm.controls[controlName].invalid && 
       this.purchaseInfoForm.controls[controlName].touched;
   }
