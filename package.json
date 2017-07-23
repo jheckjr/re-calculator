@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --prod"
+    "postinstall": "npm install extract-text-webpack-plugin@2.0.0-rc.0 && ng build --prod"
   },
   "private": true,
   "dependencies": {
