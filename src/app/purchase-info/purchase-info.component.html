@@ -6,7 +6,7 @@
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="purchasePrice"
           name="purchasePrice" [(ngModel)]="purchaseInfo.purchasePrice"
-          (blur)="update(['purchasePrice'])"
+          (blur)="update()"
           class="form-control required-bar" [class.required-error-bar]="hasError('purchasePrice')" />
       </div>
     </div>
@@ -16,7 +16,7 @@
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="closingCosts"
           name="closingCosts" [(ngModel)]="purchaseInfo.closingCosts"
-          (blur)="update(['closingCosts'])"
+          (blur)="update()"
           class="form-control required-bar" [class.required-error-bar]="hasError('closingCosts')" />
       </div>
     </div>
@@ -26,7 +26,7 @@
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="repairCosts"
           name="repairCosts" [(ngModel)]="purchaseInfo.repairCosts"
-          (blur)="update(['repairCosts'])"
+          (blur)="update()"
           class="form-control required-bar" [class.required-error-bar]="hasError('repairCosts')" />
       </div>
     </div>
@@ -36,7 +36,7 @@
         <span class="input-group-addon">$</span>
         <input type="number" formControlName="arv"
           name="arv" [(ngModel)]="purchaseInfo.arv"
-          (blur)="update(['arv'])"
+          (blur)="update()"
           class="form-control required-bar" [class.required-error-bar]="hasError('arv')" />
       </div>
     </div>
@@ -55,7 +55,7 @@
       <div class="input-group">
         <input type="number" formControlName="downPmtPct"
           name="downPmtPct" [(ngModel)]="purchaseInfo.loanInfo.downPmtPct"
-          (blur)="update(['loanInfo', 'downPmtPct'])"
+          (blur)="update()"
           class="form-control required-bar" [class.required-error-bar]="hasError('downPmtPct')" />
         <span class="input-group-addon">%</span>
       </div>
@@ -68,7 +68,7 @@
       <div class="input-group">
         <input type="number" formControlName="interestRate"
           name="interestRate" [(ngModel)]="purchaseInfo.loanInfo.interestRate"
-          (blur)="update(['loanInfo', 'interestRate'])"
+          (blur)="update()"
           class="form-control required-bar" [class.required-error-bar]="hasError('interestRate')" />
         <span class="input-group-addon">%</span>
       </div>
@@ -81,7 +81,7 @@
       <div class="input-group">
         <input type="number" formControlName="loanTerm"
           name="loanTerm" [(ngModel)]="purchaseInfo.loanInfo.loanTerm"
-          (blur)="update(['loanInfo', 'loanTerm'])"
+          (blur)="update()"
           class="form-control required-bar" [class.required-error-bar]="hasError('loanTerm')" />
         <span class="input-group-addon">yrs</span>
       </div>

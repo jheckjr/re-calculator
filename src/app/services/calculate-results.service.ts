@@ -74,12 +74,12 @@ export class CalculateResultsService {
     // Annual Net Operating Income
     this.results.keyFactors.noi = this.noi(this.results.gross.incomeYear, this.results.expenses.year);
 
-    // Total loan amount, monthly loan payment, and annual cash flow
+    // Total loan amount, annual loan payment, and annual cash flow
     let loanAmt = this.loanAmount(purchaseInfo.purchasePrice, downPmtAmt);
     let loanPmt = this.loanPayment(loanAmt, purchaseInfo.loanInfo.interestRate,
       purchaseInfo.loanInfo.loanTerm);
     let cashFlow = this.cashFlow(this.results.keyFactors.noi, loanPmt);
-    this.results.mortgage = loanPmt;
+    this.results.mortgage = loanPmt / this.MONTHS_IN_YEAR;
     this.results.keyFactors.cashFlowYear = cashFlow;
     this.results.keyFactors.cashFlowMonth = cashFlow / this.MONTHS_IN_YEAR;
 
@@ -106,34 +106,36 @@ export class CalculateResultsService {
   }
 
   /*
-   * Mortgage amount
-   * Input: purchase price
-   *		  downpayment amount
-   * Output: amount in mortgage in dollars
+   * Loan amount
+   * Input: purchase price (dollars)
+   *		  downpayment amount (dollars)
+   * Output: amount in mortgage (dollars)
    */
   private loanAmount(purchasePrice: number, downpayment: number): number {
-    if (!purchasePrice || !downpayment)
+    if (purchasePrice === undefined || downpayment === undefined) {
       return 0;
-
-    if (purchasePrice <= 0 || downpayment <= 0)
+    }
+    if (purchasePrice <= 0 || downpayment <= 0) {
       return 0;
+    }
 
     return purchasePrice - downpayment;
   }
 
   /*
    * Mortgage payment (fixed rate)
-   * Input: loan amount
+   * Input: loan amount (dollars)
    *		  interest rate (percentage)
-   *		  term in years
-   * Output: annual mortgage payment
+   *		  term (years)
+   * Output: annual mortgage payment (dollars)
    */
   private loanPayment(loanAmount: number, intRate: number, loanTerm: number): number {
-    if (!loanAmount || !intRate || !loanTerm)
+    if (loanAmount === undefined || intRate === undefined || loanTerm === undefined) {
       return 0;
-
-    if (loanAmount <= 0 || intRate <= 0 || loanTerm <= 0)
+    }
+    if (loanAmount <= 0 || intRate <= 0 || loanTerm <= 0) {
       return 0;
+    }
 
     let rate = (intRate / 100) / 12;	// monthly rate
     let term = loanTerm * 12;	// term in months
@@ -145,32 +147,31 @@ export class CalculateResultsService {
 
   /*
    * Cash outlay
-   * Input: downpayment
-   * 		  closing costs
-   *      repair cost
-   * Output: cash outlay amount
+   * Input: downpayment (dollars)
+   * 		  closing costs (dollars)
+   *      repair cost (dollars)
+   * Output: cash outlay amount (dollars)
    */
   private cashOutlay(downpayment: number, closingCost: number, repairCost: number): number {
-    if (!downpayment || !closingCost || !repairCost)
+    if (downpayment === undefined || closingCost === undefined || repairCost === undefined) {
       return 0;
-
-    if (downpayment < 0 || closingCost < 0 || repairCost < 0)
+    }
+    if (downpayment < 0 || closingCost < 0 || repairCost < 0) {
       return 0;
+    }
 
     return downpayment + closingCost + repairCost;
   }
 
   /*
    * Gross Revenue
-   * Input: monthly rent amounts
-   * Output: monthly gross revenue
+   * Input: monthly rent amounts (dollars)
+   * Output: monthly gross revenue (dollars)
    */
   private grossRevenue(rent: number[]): number {
-    if (!rent)
+    if (rent === undefined || rent.length === 0) {
       return 0;
-
-    if (rent.length === 0)
-    	return 0;
+    }
 
     return rent.reduce(function(prev, curr) {
     	return prev += curr;
@@ -179,93 +180,98 @@ export class CalculateResultsService {
 
   /*
    * Gross income
-   * Input: gross revenue
+   * Input: gross revenue (dollars)
    *		  vacancy rate (percentage)
-   * Output: gross income
+   * Output: gross income (dollars)
    */
   private grossIncome(grossRev: number, vacancyRate: number): number {
-    if (!grossRev || !vacancyRate)
+    if (grossRev === undefined || vacancyRate === undefined) {
       return 0;
-
-    if (vacancyRate < 0 || 100 < vacancyRate)
+    }
+    if (vacancyRate < 0 || 100 < vacancyRate) {
       return 0;
+    }
 
     return grossRev * (1 - (vacancyRate / 100));
   }
 
   /*
    * Total expenses
-   * Input: list of annual expenses
-   *      gross annual income
-   * Output: sum of expenses
+   * Input: list of annual expenses (dollars)
+   *      gross annual income (dollars)
+   * Output: sum of expenses (dollars)
    */
   private totalExpenses(expenses: any, grossInc: number, grossRev: number): number {
-    if (!expenses || !grossInc)
+    if (expenses === undefined || grossInc === undefined) {
       return 0;
+    }
 
-    let totalExp = expenses.electric + expenses.gas + expenses.water +
-      expenses.sewer + expenses.trash + expenses.other + expenses.propTax +
-      expenses.insurance;
-    totalExp += ((expenses.repairs * grossRev) + (expenses.propMgmt * grossInc)) / 100;
+    let totalExp = (expenses.electric || 0) + (expenses.gas || 0) + (expenses.water || 0) +
+      (expenses.sewer || 0) + (expenses.trash || 0)+ (expenses.other || 0) + (expenses.propTax || 0) +
+      (expenses.insurance || 0);
+    totalExp += (((expenses.repairs || 0) * grossRev) + ((expenses.propMgmt || 0) * grossInc)) / 100;
 
     return totalExp;
   }
 
   /*
    * NOI
-   * Input: gross income
-   * 		  total expenses
-   * Output: NOI
+   * Input: gross income (dollars)
+   * 		  total expenses (dollars)
+   * Output: NOI (dollars)
    */
   private noi(grossIncome: number, totalExpenses: number): number {
-    if (!grossIncome || !totalExpenses)
+    if (grossIncome === undefined || totalExpenses === undefined) {
       return 0;
+    }
 
     return grossIncome - totalExpenses;
   }
 
   /*
    * Cash flow
-   * Input: noi
-   *		  mortgage payment
-   * Output: cash flow amount
+   * Input: NOI (dollars)
+   *		    annual mortgage payment (dollars)
+   * Output: annual cash flow amount (dollars)
    */
   private cashFlow(noi: number, loanPayment: number): number {
-    if (!noi || !loanPayment)
+    if (noi === undefined || loanPayment === undefined) {
       return 0;
+    }
 
     return noi - loanPayment;
   }
 
   /*
    * Cash ROI
-   * Input: annual cash flow
-   *		  cash outlay
-   * Output: cash ROI percentage
+   * Input: annual cash flow (dollars)
+   *		  cash outlay (dollars)
+   * Output: cash ROI (percentage)
    */
   private cashROI(cashFlow: number, cashOutlay: number): number {
-    if (!cashOutlay || !cashFlow)
+    if (cashOutlay === undefined || cashFlow === undefined) {
       return 0;
-
-    if (cashOutlay === 0)
-    		return 0;
+    }
+    if (cashOutlay === 0) {
+      return 0;
+    }
 
     return (cashFlow / cashOutlay) * 100;
   }
 
   /*
    * Total ROI
-   * Input: equity accrued
-   *   	  appreciation
-   *		  annual cash flow
-   *		  cash outlay
-   * Output: total ROI percentage
+   * Input: equity accrued (dollars)
+   *   	  appreciation (dollars)
+   *		  annual cash flow (dollars)
+   *		  cash outlay (dollars)
+   * Output: total ROI (percentage)
    */
   private totalROI(equity: number, appreciation: number, cashFlow: number, cashOutlay: number): number {
-    if (!equity || !appreciation || !cashFlow || !cashOutlay) {
+    if (equity === undefined || appreciation === undefined || 
+      cashFlow === undefined || cashOutlay === undefined) {
       return 0;
     }
-
     if (cashOutlay === 0) {
     	return 0;
     }
@@ -275,48 +281,51 @@ export class CalculateResultsService {
 
   /*
    * Cap rate
-   * Input: NOI
-   *		  purchase cost
+   * Input: NOI (dollars)
+   *		  purchase cost (dollars)
    * Output: cap rate (percentage)
    */
   private capRate(purchasePrice: number, noi: number): number {
-    if (!purchasePrice || !noi)
+    if (purchasePrice === undefined || noi === undefined) {
       return 0;
-
-    if (purchasePrice <= 0)
-    		return 0;
+    }
+    if (purchasePrice <= 0) {
+      return 0;
+    }
 
     return (noi / purchasePrice) * 100;
   }
 
   /*
    * Gross rent multiplier
-   * Input: purchase price
-   *		  gross revenue per year
-   * Output: gross rent multiplier
+   * Input: purchase price (dollars)
+   *		  annual gross revenue (dollars)
+   * Output: gross rent multiplier (ratio)
    */
   private grossRentMult(purchasePrice: number, grossRev: number): number {
-    if (!purchasePrice || !grossRev)
+    if (purchasePrice === undefined || grossRev === undefined) {
       return 0;
-
-    if (purchasePrice <= 0 || grossRev <= 0)
-    		return 0;
+    }
+    if (purchasePrice <= 0 || grossRev <= 0) {
+      return 0;
+    }
 
     return purchasePrice / grossRev;
   }
 
   /*
    * Debt service coverage ratio (DSCR)
-   * Input: annual NOI
-   *		  monthly mortgage payment
-   * Output: DSCR
+   * Input: annual NOI (dollars)
+   *		  monthly mortgage payment (dollars)
+   * Output: DSCR (ratio)
    */
   private debtSCRatio(noi: number, loanPayment: number): number {
-    if (!noi || !loanPayment)
+    if (noi === undefined || loanPayment === undefined) {
       return 0;
-
-    if (loanPayment === 0)
-    		return 0;
+    }
+    if (loanPayment === 0) {
+      return 0;
+    }
 
     return noi / loanPayment;
   }
@@ -324,43 +333,46 @@ export class CalculateResultsService {
   /*
    * Equity accrued
    * Input: year
-   * Output: equity accrued in that year
+   * Output: equity accrued in that year (dollars)
    * remainingLoanVal is array of yearly remaining loan amounts
    */
   private equity(remainingLoanVal: number[], year: number, total: boolean = false): number {
-    if (!remainingLoanVal || !year)
+    if (remainingLoanVal === undefined || year === undefined) {
       return 0;
-
-    if (remainingLoanVal.length === 0)
-    		return 0;
-    if (year === 0)
-    		return remainingLoanVal[year];
-
-    if (!total)
-    		return remainingLoanVal[year - 1] - remainingLoanVal[year];
-    else
-    		return remainingLoanVal.reduce(function(prev, curr, index, arr) {
-        if (index <= year)
+    }
+    if (remainingLoanVal.length === 0) {
+      return 0;
+    }
+    if (year === 0) {
+      return remainingLoanVal[year];
+    }
+    if (!total) {
+      return remainingLoanVal[year - 1] - remainingLoanVal[year];
+    } else {
+      return remainingLoanVal.reduce(function(prev, curr, index, arr) {
+        if (index <= year) {
           return prev + (arr[index] - arr[index - 1]);
-        else
+        } else {
           return prev;
-    		});
+        }
+    	});
+    }
   }
 
   /*
    * Appreciation
-   * Input: total purchase cost
-   *		  appreciation rate
+   * Input: total purchase cost (dollars)
+   *		  appreciation rate (percentage)
    *      year
-   * Output: appreciation amount
+   * Output: appreciation amount (dollars)
    */
   private appreciation(totalCost: number, appRate: number, year: number): number {
-    if (!totalCost || !appRate || !year)
+    if (totalCost === undefined || appRate === undefined || year === undefined) {
       return 0;
+    }
 
     let annualApp = 0;
     let rate = appRate / 100;
-
     for (let i = 1; i <= year; i++) {
     		annualApp = rate * (totalCost + annualApp);
     }
@@ -370,35 +382,34 @@ export class CalculateResultsService {
 
   /*
    * Create amortization schedule
-   * Input: loan amount
-   * 		  interest rate
+   * Input: loan amount (dollars)
+   * 		  interest rate (percentage)
    *		  loan term (years)
-   * Output: array of yearly remaining loan amounts
+   * Output: array of yearly remaining loan amounts (dollars)
    */
   private makeAmortSchedule(loanAmount: number, intRate: number, loanTerm: number): number[] {
-    if (!loanAmount || !intRate || !loanTerm) {
+    if (loanAmount === undefined || intRate === undefined || loanTerm === undefined) {
       return [0];
     }
-
     if (loanAmount <= 0 || intRate <= 0 || loanTerm <= 0) {
     	return [0];
     }
 
     let schedule = [loanAmount];
-    let monthlyRate = (intRate / 100) / 12;
+    let monthlyRate = (intRate / 100) / this.MONTHS_IN_YEAR;
     let monthlyRem = loanAmount;
     let monthlyPayment = this.loanPayment(loanAmount, intRate, loanTerm) / this.MONTHS_IN_YEAR;
 
-    for (let i = 1; i <= loanTerm * 12; i++) {
+    for (let i = 1; i <= loanTerm * this.MONTHS_IN_YEAR; i++) {
     		let principal = monthlyPayment - (monthlyRem * monthlyRate);
     		monthlyRem -= principal;
 
-    		if (i % 12 === 0) {
+    		if (i % this.MONTHS_IN_YEAR === 0) {
           schedule.push(monthlyRem);
         }
     }
 
-    // Remove rounding error
+    // Remove rounding error in final year
     schedule[loanTerm] = 0;
 
     return schedule;

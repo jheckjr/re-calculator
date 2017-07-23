@@ -64,19 +64,7 @@ export class RentalInfoComponent {
     };
   }
 
-  private update(keys) {
-    // Set item to zero if input is empty by moving through layers of purchaseInfo
-    // by key name
-    keys.reduce((obj, key, idx, array) => {
-      if (idx === array.length - 1) {
-        if (!obj[key]) {
-          obj[key] = 0;
-        }
-      } else {
-        return obj[key];
-      }
-    }, this.rentalInfo);
-    
+  private update() {
     this.updateTotalRent();
     this.updateTotalUtilities();
   }
