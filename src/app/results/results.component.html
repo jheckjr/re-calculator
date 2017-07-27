@@ -109,7 +109,11 @@
   </div>
 </div>
 <div class="side-info">
-  <table>
+  <div class="list-group">
+    <h4 class="list-group-item-heading">Total Cost</h4>
+    <p class="list-group-item-text">{{results.totalCost | tostring:0:true}}</p>
+  </div>
+  <!--<table>
     <tbody>
       <tr>
         <td class="heading">
@@ -142,9 +146,9 @@
         <td class="data">
           {{results.arv | tostring:0:true}}
         </td>
-      </tr>  
+      </tr>
     </tbody>
-  </table>
+  </table>-->
 </div>
 <br/>
 <div class="table-responsive year-table">
