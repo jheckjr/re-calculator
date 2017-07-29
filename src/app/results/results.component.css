@@ -1,46 +1,17 @@
-.main-info {
-  width: 65%;
-  float: left;
-  padding: 10px;
+p {
+  font-size: 1.2em;
 }
-.side-info {
-  width: 32%;
-  float: right;
-  padding-top: 10px;
+.positive {
+  color: green;
 }
-.results-table {
-  margin-bottom: 15px;
-  padding: 0 5px 5px 10px;
-  border: 1px solid #aaa;
-  border-radius: 5px;
-  box-shadow: 0 0 2px; 
+.negative {
+  color: red;
+}
+.right-border {
+  border-right: 1px solid #ddd;
 }
 table {
   padding: 10px;
-}
-tr.heading-4 > td {
-  width: 15%;
-}
-tr.heading-6 > td {
-  width: 10%;
-}
-tr.heading > td {
-  padding: 10px 10px 0 0;
-}
-tr.data > td {
-  font-size: 1.2em;
-  font-weight: 500;
-  padding: 2px 10px 2px 1px;
-}
-td.data {
-  font-size: 1.2em;
-  font-weight: 500;
-  padding-top: 7px;
-  vertical-align: bottom;
-}
-td.heading {
-  padding: 7px 20px 0 0;
-  vertical-align: bottom;
 }
 .year-table {
   width: 100%;

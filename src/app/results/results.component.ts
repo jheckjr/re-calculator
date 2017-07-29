@@ -44,4 +44,11 @@ export class ResultsComponent implements OnChanges, OnInit {
       this.equityValues[year] = tempValue - (this.results.amortSchedule[year] || 0);
     }
   }
+  
+  isPositive(value) {
+    if (parseFloat(value) >= 0) {
+      return 'positive';
+    }
+    return 'negative';
+  }
 }

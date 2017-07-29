@@ -1,156 +1,95 @@
-<div class="main-info">
-  <div class="results-table">
-    <table>
-      <tbody>
-        <tr class="heading heading-4">
-          <td>
-            Monthly Revenue
-          </td>
-          <td>
-            Monthly Income
-          </td>
-          <td>
-            Monthly Expenses
-          </td>
-          <td>
-            Monthly Cash Flow
-          </td>
-        </tr>
-        <tr class="data">
-          <td>
-            {{results.gross.revenueMonth | tostring:0:true}}
-          </td>
-          <td>
-            {{results.gross.incomeMonth | tostring:0:true}}
-          </td>
-          <td>
-            {{results.expenses.month | tostring:0:true}}
-          </td>
-          <td>
-            {{results.keyFactors.cashFlowMonth | tostring:0:true}}
-          </td>
-        </tr>
-        <tr class="heading heading-4">
-          <td>
-            Annual Revenue
-          </td>
-          <td>
-            Annual Income
-          </td>
-          <td>
-            Annual Expenses
-          </td>
-          <td>
-            Annual Cash Flow
-          </td>
-        </tr>
-        <tr class="data">
-          <td>
-            {{results.gross.revenueYear | tostring:0:true}}
-          </td>
-          <td>
-            {{results.gross.incomeYear | tostring:0:true}}
-          </td>
-          <td>
-            {{results.expenses.year | tostring:0:true}}
-          </td>
-          <td>
-            {{results.keyFactors.cashFlowYear | tostring:0:true}}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div class="list-group">
+  <div class="list-group-item">
+    <div class="row">
+      <div class="col-sm-2">
+        <h5 class="list-group-item-heading">Total Cost</h5>
+        <p class="list-group-item-text">{{results.totalCost | tostring:0:true}}</p>
+      </div>
+      <div class="col-sm-2">
+        <h5 class="list-group-item-heading">Cash Needed</h5>
+        <p class="list-group-item-text">{{results.cashOutlay | tostring:0:true}}</p>
+      </div>
+      <div class="col-sm-2">
+        <h5 class="list-group-item-heading">Monthly Mortgage</h5>
+        <p class="list-group-item-text">{{results.mortgage | tostring:0:true}}</p>
+      </div>
+      <div class="col-sm-2 right-border">
+        <h5 class="list-group-item-heading">After Repair Value</h5>
+        <p class="list-group-item-text">{{results.arv | tostring:0:true}}</p>
+      </div>
+      <div class="col-sm-2">
+        <h5 class="list-group-item-heading">NOI</h5>
+        <p class="list-group-item-text" [ngClass]="[isPositive(results.keyFactors.noi)]">
+          {{results.keyFactors.noi | tostring:0:true}}
+        </p>
+      </div>
+      <div class="col-sm-2">
+        <h5 class="list-group-item-heading">Cap Rate</h5>
+        <p class="list-group-item-text">{{results.keyFactors.capRate | tostring:2:false}}%</p>
+      </div>
+    </div>
   </div>
-  <div class="results-table">
-    <table>
-      <tbody>
-        <tr class="heading heading-6">
-          <td>
-            NOI
-          </td>
-          <td>
-            Cash ROI
-          </td>
-          <td>
-            Total ROI
-          </td>
-          <td>
-            Cap Rate
-          </td>
-          <td>
-            GRM
-          </td>
-          <td>
-            DSCR
-          </td>
-        </tr>
-        <tr class="data">
-          <td>
-            {{results.keyFactors.noi | tostring:0:true}}
-          </td>
-          <td>
-            {{results.keyFactors.cashROI | tostring:2:false}}
-          </td>
-          <td>
-            {{results.keyFactors.totalROI | tostring:2:false}}
-          </td>
-          <td>
-            {{results.keyFactors.capRate | tostring:2:false}}
-          </td>
-          <td>
-            {{results.keyFactors.grm | tostring:2:false}}
-          </td>
-          <td>
-            {{results.keyFactors.dscr | tostring:2:false}}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="list-group-item">
+    <div class="row">
+      <div class="col-sm-2">
+        <h5 class="list-group-item-heading">Monthly Revenue</h5>
+        <p class="list-group-item-text">{{results.gross.revenueMonth | tostring:0:true}}</p>
+      </div>
+      <div class="col-sm-2">
+        <h5 class="list-group-item-heading">Monthly Income</h5>
+        <p class="list-group-item-text">{{results.gross.incomeMonth | tostring:0:true}}</p>
+      </div>
+      <div class="col-sm-2">
+        <h5 class="list-group-item-heading">Monthly Expenses</h5>
+        <p class="list-group-item-text">{{results.expenses.month | tostring:0:true}}</p>
+      </div>
+      <div class="col-sm-2 right-border">
+        <h5 class="list-group-item-heading">Monthly Cash Flow</h5>
+        <p class="list-group-item-text" [ngClass]="[isPositive(results.keyFactors.cashFlowMonth)]">
+          {{results.keyFactors.cashFlowMonth | tostring:0:true}}
+        </p>
+      </div>
+      <div class="col-sm-2">
+        <h5 class="list-group-item-heading">Cash ROI</h5>
+        <p class="list-group-item-text">{{results.keyFactors.cashROI | tostring:2:false}}%</p>
+      </div>
+      <div class="col-sm-2">
+        <h5 class="list-group-item-heading">Total ROI</h5>
+        <p class="list-group-item-text">{{results.keyFactors.totalROI | tostring:2:false}}%</p>
+      </div>
+    </div>
+  </div>
+  <div class="list-group-item">
+    <div class="row">
+      <div class="col-sm-2">
+        <h5 class="list-group-item-heading">Annual Revenue</h5>
+        <p class="list-group-item-text">{{results.gross.revenueYear | tostring:0:true}}</p>
+      </div>
+      <div class="col-sm-2">
+        <h5 class="list-group-item-heading">Annual Income</h5>
+        <p class="list-group-item-text">{{results.gross.incomeYear | tostring:0:true}}</p>
+      </div>
+      <div class="col-sm-2">
+        <h5 class="list-group-item-heading">Annual Expenses</h5>
+        <p class="list-group-item-text">{{results.expenses.year | tostring:0:true}}</p>
+      </div>
+      <div class="col-sm-2 right-border">
+        <h5 class="list-group-item-heading">Annual Cash Flow</h5>
+        <p class="list-group-item-text" [ngClass]="[isPositive(results.keyFactors.cashFlowYear)]">
+          {{results.keyFactors.cashFlowYear | tostring:0:true}}
+        </p>
+      </div>
+      <div class="col-sm-2">
+        <h5 class="list-group-item-heading">GRM</h5>
+        <p class="list-group-item-text">{{results.keyFactors.grm | tostring:2:false}}</p>
+      </div>
+      <div class="col-sm-2">
+        <h5 class="list-group-item-heading">DSCR</h5>
+        <p class="list-group-item-text">{{results.keyFactors.dscr | tostring:2:false}}</p>
+      </div>
+    </div>
   </div>
 </div>
-<div class="side-info">
-  <div class="list-group">
-    <h4 class="list-group-item-heading">Total Cost</h4>
-    <p class="list-group-item-text">{{results.totalCost | tostring:0:true}}</p>
-  </div>
-  <!--<table>
-    <tbody>
-      <tr>
-        <td class="heading">
-          Total Cost
-        </td>
-        <td class="data">
-          {{results.totalCost | tostring:0:true}}
-        </td>
-      </tr>
-      <tr>
-        <td class="heading">
-          Cash Needed
-        </td>
-        <td class="data">
-          {{results.cashOutlay | tostring:0:true}}
-        </td>
-      </tr>
-      <tr>
-        <td class="heading">
-          Monthly Mortgage
-        </td>
-        <td class="data">
-          {{results.mortgage | tostring:0:true}}
-        </td>
-      </tr>
-      <tr>
-        <td class="heading">
-          After Repair Value
-        </td>
-        <td class="data">
-          {{results.arv | tostring:0:true}}
-        </td>
-      </tr>
-    </tbody>
-  </table>-->
-</div>
-<br/>
 <div class="table-responsive year-table">
   <table class="table">
     <thead>
@@ -158,7 +97,7 @@
         <th>
           Year
         </th>
-        <th *ngFor="let year of years; let idx = index">
+        <th *ngFor="let year of years; let idx = index" style="text-align: center;">
           {{idx}}
         </th>
       </tr>
